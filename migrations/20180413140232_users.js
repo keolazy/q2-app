@@ -5,7 +5,6 @@ exports.up = function(knex, Promise) {
 		table.string('location');
 		table.string('interests');
 		table.string('hashed_pw');
-		table.string('email_personal');
 		table.string('email_professional');
 		table.string('linkedin');
 		table.string('facebook');
