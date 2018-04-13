@@ -9,8 +9,13 @@ exports.up = function(knex, Promise) {
 			.foreign('event_id')
 			.references('events.id')
 			.onDelete('CASCADE');
-
-		table.string('phone');
+		table.string('questions');
+		table.string('topics');
+		table.string('job_status');
+		table.string('noise_level');
+		table.string('where_to_find');
+		table.string('ask_me');
+		table.string('personality');
 		table.timestamps(true, true);
 	});
 };
