@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
 		table.string('email');
 		table.string('location');
 		table.string('interests');
+		table.string('profession');
 		table.string('hashed_pw');
 		table.string('email_professional');
 		table.string('linkedin');
