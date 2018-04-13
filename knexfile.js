@@ -8,7 +8,7 @@ module.exports = {
 		}
 	},
 
-	development: {
+	test: {
 		client: 'postgresql',
 		connection: {
 			database: 'readme-app-test'
