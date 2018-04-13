@@ -1,0 +1,35 @@
+{
+  "name": "q2-app",
+  "version": "1.0.0",
+  "description": "ReadMe-App",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.8",
+    "express": "^4.16.3",
+    "knex": "^0.14.6",
+    "method-override": "^2.3.10",
+    "pg": "^7.4.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.1.0",
+    "morgan": "^1.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ian-schu/q2-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ian-schu/q2-app/issues"
+  },
+  "homepage": "https://github.com/ian-schu/q2-app#readme"
+}
