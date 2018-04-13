@@ -84,7 +84,7 @@ exports.seed = function(knex, Promise) {
         },
         {
           email: "daniel.wang@gmail.com",
-          location: "Austin",
+          location: "austin",
           interests: "Business",
           profession: "Affiliate Marketing",
           hashed_pw: "",
