@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.foreign('user_id_owner').references('users.id').onDelete('CASCADE');
     table.foreign('user_id_friend').references('users.id').onDelete('CASCADE');
+    table.timestamps(true, true);
   })
 };
 
