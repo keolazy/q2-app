@@ -2,7 +2,7 @@
 
 module.exports = {
 	development: {
-		client: 'pg',
+		client: 'postgresql',
 		connection: {
 			database: 'readme-app-dev'
 		}
