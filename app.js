@@ -4,9 +4,9 @@ const app = express();
 const PORT = process.env.PORT || 7777;
 const knex = require('./db/knex.js');
 
-const events = require('./routes/events');
-const connections = require('./routes/connections');
-const profiles = require('./routes/profiles');
+const events = require('./routes/events-routes');
+const connections = require('./routes/connections-routes');
+const profiles = require('./routes/profiles-routes');
 
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
