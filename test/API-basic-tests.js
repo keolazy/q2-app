@@ -18,7 +18,7 @@ let users_events = knex('users_events').select('*');
 // 	});
 // });
 
-describe(`'/events' root`, () => {
+describe(`/events`, () => {
 	it(`Returned events should include ALL events`, done => {
 		request
 			.get('/events')
@@ -79,7 +79,7 @@ describe(`'/events' root`, () => {
 	});
 });
 
-describe(`'/connections' root`, () => {
+describe(`/connections`, () => {
 	it(`Returned connections should include ALL connections`, done => {
 		request
 			.get('/connections')
