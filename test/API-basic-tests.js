@@ -12,6 +12,13 @@ let events = knex('events').select('*');
 let connections = knex('connections').select('*');
 let users_events = knex('users_events').select('*');
 
+// events.where('id', 3)
+//
+// events.then(result => {
+// 	console.log(result)
+// })
+// console.log(events);
+
 // describe('This is a sample test', () => {
 // 	it('And it should pass', () => {
 // 		expect(true).to.equal(true);
@@ -77,6 +84,25 @@ describe(`/events`, () => {
 				done(err);
 			});
 	});
+});
+it(`specific event should be rendered`, done => {
+	request
+		.get('/events/3')
+		.expect('Content-Type', /json/)
+		.expect(200)
+		.then(response => {
+			events
+				.then(events => {
+					expect(response.body[2].location).to.equal(events[2].location);
+					done();
+				})
+				.catch(err => {
+					done(err);
+				});
+		})
+		.catch(err => {
+			done(err);
+		});
 });
 
 describe(`/connections`, () => {

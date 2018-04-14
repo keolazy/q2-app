@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
-const bodyParser = require('body-parser');
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({extended:true}));
+// const bodyParser = require('body-parser');
+// router.use(bodyParser.json());
+// router.use(bodyParser.urlencoded({extended:true}));
 
 router.get('/', (req, res) => {
 	// res.status(200).json(`The events are here.`)
@@ -15,7 +15,11 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
 	knex('events').select('*')
 	.where({id:req.params.id}).then( (oneEvent) => {
-		res.send(oneEvent[0])
+		res.send(oneEvent)
+		console.log(oneEvent[0].location)
 	})
 })
+// router.post('/', (req, res) => {
+//
+// })
 module.exports = router;
