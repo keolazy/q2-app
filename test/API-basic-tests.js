@@ -107,7 +107,7 @@ describe(`/connections`, () => {
 			.then(response => {
 				connections
 					.then(connections => {
-						expect(response.body[0]).to.equal(connections[0]);
+						expect(response.body[0].user_id_friend).to.equal(connections[0].user_id_friend);
 						done();
 					})
 					.catch(err => {
@@ -127,7 +127,7 @@ describe(`/connections`, () => {
 				connections
 					.then(connections => {
 						let lastIndex = connections.length - 1;
-						expect(response.body[lastIndex]).to.equal(connections[lastIndex]);
+						expect(response.body[lastIndex].user_id_owner).to.equal(connections[lastIndex].user_id_owner);
 						done();
 					})
 					.catch(err => {
