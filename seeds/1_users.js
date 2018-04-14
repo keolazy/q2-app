@@ -6,6 +6,8 @@ exports.seed = function(knex, Promise) {
 			// Inserts seed entries
 			return knex('users').insert([
 				{
+					first: 'Nathan',
+					last: 'Keolasy',
 					email: 'nathanK@gmail.com',
 					location: 'austin',
 					interests: 'Paintball',
@@ -17,6 +19,8 @@ exports.seed = function(knex, Promise) {
 					phone: '512-364-6188'
 				},
 				{
+					first: 'Jordan',
+					last: 'Peterson',
 					email: 'JordanPeterson@gmail.com',
 					location: 'austin',
 					interests: 'philosophy',
@@ -28,6 +32,8 @@ exports.seed = function(knex, Promise) {
 					phone: '512-777-6677'
 				},
 				{
+					first: 'Barack',
+					last: 'Obama',
 					email: 'BarackObama@yahoo.com',
 					location: 'austin',
 					interests: 'politics',
@@ -39,6 +45,8 @@ exports.seed = function(knex, Promise) {
 					phone: '469-398-1036'
 				},
 				{
+					first: 'Henry',
+					last: 'Lee',
 					email: 'HenryLee@gmail.com',
 					location: 'austin',
 					interests: 'dogs',
@@ -50,6 +58,8 @@ exports.seed = function(knex, Promise) {
 					phone: '512-835-9485'
 				},
 				{
+					first: 'Maggie',
+					last: 'Sin',
 					email: 'maggiesin@chinasbank.com',
 					location: 'Los Angeles',
 					interests: 'Bottle service',
@@ -61,6 +71,8 @@ exports.seed = function(knex, Promise) {
 					phone: '512-777-6677'
 				},
 				{
+					first: 'David',
+					last: 'Chen',
 					email: 'davidchen@gmail.com',
 					location: 'Los Angeles',
 					interests: 'physics',
@@ -72,6 +84,8 @@ exports.seed = function(knex, Promise) {
 					phone: '832-364-5522'
 				},
 				{
+					first: 'Miguel',
+					last: 'Vasquez',
 					email: 'miguelvazquez@gmail.com',
 					location: 'Los Angeles',
 					interests: 'memes',
@@ -83,6 +97,8 @@ exports.seed = function(knex, Promise) {
 					phone: '210-888-3942'
 				},
 				{
+					first: 'Daniel',
+					last: 'Wang',
 					email: 'daniel.wang@gmail.com',
 					location: 'Austin',
 					interests: 'Business',
