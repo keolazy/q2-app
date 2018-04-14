@@ -10,8 +10,12 @@ router.get('/', (req, res) => {
 		knex('events').select('*')
 		.then( (events) => {
 			res.send(events)
-			console.log('sounds good nigga')
 		})
 });
-
+router.get('/:id', (req, res) => {
+	knex('events').select('*')
+	.where({id:req.params.id}).then( (oneEvent) => {
+		res.send(oneEvent[0])
+	})
+})
 module.exports = router;

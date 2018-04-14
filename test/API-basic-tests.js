@@ -46,7 +46,7 @@ describe(`'/events' root`, () => {
 			.then(response => {
 				events
 					.then(events => {
-						expect(response.body[0]).to.equal(events[0]);
+						expect(response.body[0].description).to.equal(events[0].description);
 						done();
 					})
 					.catch(err => {
@@ -66,7 +66,7 @@ describe(`'/events' root`, () => {
 				events
 					.then(events => {
 						let lastIndex = events.length - 1;
-						expect(response.body[lastIndex]).to.equal(events[lastIndex]);
+						expect(response.body[lastIndex].description).to.equal(events[lastIndex].description);
 						done();
 					})
 					.catch(err => {
