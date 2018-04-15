@@ -5,7 +5,7 @@ exports.seed = function(knex, Promise) {
 		{
 			first: 'Nathan',
 			last: 'Keolasy',
-			email: 'nathanK@gmail.com',
+			email: 'nathank@gmail.com',
 			location: 'austin',
 			interests: 'Paintball',
 			profession: 'Web Development/Marketing',
@@ -19,7 +19,7 @@ exports.seed = function(knex, Promise) {
 		{
 			first: 'Jordan',
 			last: 'Peterson',
-			email: 'JordanPeterson@gmail.com',
+			email: 'jordanpeterson@gmail.com',
 			location: 'austin',
 			interests: 'philosophy',
 			profession: 'Clinical Psychologist',
@@ -33,7 +33,7 @@ exports.seed = function(knex, Promise) {
 		{
 			first: 'Barack',
 			last: 'Obama',
-			email: 'BarackObama@yahoo.com',
+			email: 'barackobama@yahoo.com',
 			location: 'austin',
 			interests: 'politics',
 			profession: 'Public Speaker',
@@ -47,7 +47,7 @@ exports.seed = function(knex, Promise) {
 		{
 			first: 'Henry',
 			last: 'Lee',
-			email: 'HenryLee@gmail.com',
+			email: 'henrylee@gmail.com',
 			location: 'austin',
 			interests: 'dogs',
 			profession: 'Web Developer',
