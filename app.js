@@ -4,6 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 7777;
 const knex = require('./db/knex.js');
 const path = require('path');
+const session = require('express-session');
 
 const events = require('./routes/events-routes');
 const connections = require('./routes/connections-routes');
@@ -16,12 +17,20 @@ const ejs = require('ejs');
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res, next) => {
-	res.redirect('/login.html');
-});
+app.use(session({ secret: `zubair's revenge`, cookie: {} }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.get('/', (req, res, next) => {
+	console.log(req.session);
+	if (req.session.user) {
+		res.redirect('/protected-generic.html');
+	} else {
+		console.log('No session found on this request.');
+		res.redirect('/login.html');
+	}
+});
 
 app.use('/auth', auth);
 app.use('/events', events);
