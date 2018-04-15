@@ -135,6 +135,7 @@ html {
 
 .section__form__fieldset {
 	width: 100%;
+	border: 0.2vmin solid gray;
 }
 
 .section__form__legend {

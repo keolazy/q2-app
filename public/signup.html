@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ReadMe App - Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  </head>
+  <body>
+    <header id="header">
+      <span id="title">Readme App</span>
+      <span id="hamburger-menu"><i class="fas fa-bars"></i></span>
+    </header>
+    <main id="main">
+      <section class="section">
+        <div class="section__title">Welcome to ReadMe</div>
+        <form class="section__form" action="/signup" method="post">
+          <fieldset class="section__form__fieldset">
+            <legend class="section__form__legend">Sign up for a new account</legend>
+            <label class="section__form__label" for="email">Email</label>
+            <input class="section__form__input" type="email" name="email" value="">
+            <label class="section__form__label" for="password">Password</label>
+            <input class="section__form__input" type="password" name="password" value="">
+            <p class="section__form__text">Already have an account? <a href="/login.html">Login here</a></p>
+            <button class="section__form__submit" type="submit">Submit</button>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
