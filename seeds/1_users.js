@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 exports.seed = function(knex, Promise) {
 	return knex('users').insert([
 		{
@@ -11,6 +13,7 @@ exports.seed = function(knex, Promise) {
 			email_professional: 'nathanK@dropbox.com',
 			linkedin: 'NathanK777',
 			facebook: 'none',
+			hashed_pw: bcrypt.hashSync('nathan', 10),
 			phone: '512-364-6188'
 		},
 		{
@@ -24,6 +27,7 @@ exports.seed = function(knex, Promise) {
 			email_professional: 'JordanP@utoronto.edu',
 			linkedin: 'JordanP1980',
 			facebook: 'JordanP',
+			hashed_pw: bcrypt.hashSync('jordan', 10),
 			phone: '512-777-6677'
 		},
 		{
@@ -37,6 +41,7 @@ exports.seed = function(knex, Promise) {
 			email_professional: 'potus@whitehouse.gov',
 			linkedin: 'BarackO000',
 			facebook: 'Barack0bama',
+			hashed_pw: bcrypt.hashSync('barack', 10),
 			phone: '469-398-1036'
 		},
 		{
@@ -50,6 +55,7 @@ exports.seed = function(knex, Promise) {
 			email_professional: 'yakko@nationslending.com',
 			linkedin: 'HenryLee17',
 			facebook: 'Henry.Lee17',
+			hashed_pw: bcrypt.hashSync('henry', 10),
 			phone: '512-835-9485'
 		},
 		{
@@ -63,6 +69,7 @@ exports.seed = function(knex, Promise) {
 			email_professional: 'maggiesin@gmail.com',
 			linkedin: 'maggieSin13',
 			facebook: 'maggie.sin1993',
+			hashed_pw: bcrypt.hashSync('maggie', 10),
 			phone: '512-777-6677'
 		},
 		{
@@ -76,6 +83,7 @@ exports.seed = function(knex, Promise) {
 			email_professional: 'dchen@ey.com',
 			linkedin: 'dchen91',
 			facebook: 'david.chen91',
+			hashed_pw: bcrypt.hashSync('david', 10),
 			phone: '832-364-5522'
 		},
 		{
@@ -89,6 +97,7 @@ exports.seed = function(knex, Promise) {
 			email_professional: 'miguelvazquez@yahoo.com',
 			linkedin: 'miguelv92',
 			facebook: 'none',
+			hashed_pw: bcrypt.hashSync('miguel', 10),
 			phone: '210-888-3942'
 		},
 		{
@@ -102,6 +111,7 @@ exports.seed = function(knex, Promise) {
 			email_professional: 'danie.wang.consulting@uprisermarketing.com',
 			linkedin: 'daniel.wang.050493',
 			facebook: 'daniel.wang93',
+			hashed_pw: bcrypt.hashSync('daniel', 10),
 			phone: '469-562-9938'
 		}
 	]);
