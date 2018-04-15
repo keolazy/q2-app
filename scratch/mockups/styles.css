@@ -97,7 +97,7 @@ html {
 }
 
 .card__button {
-	height: 3.8vh;
+	min-height: 3.8vh;
 	flex-grow: 1;
 	font-size: 2.2vh;
 }
@@ -118,4 +118,43 @@ html {
 
 .card__button--green:hover {
 	background-color: #7affdb;
+}
+
+.section__form {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 86vw;
+	padding: 1vmin 1vmin;
+	box-sizing: border-box;
+	/* border: 1px solid gray; */
+	margin: 1.2vh 2vw;
+	font-size: 3vh;
+	text-align: center;
+}
+
+.section__form__fieldset {
+	width: 100%;
+}
+
+.section__form__legend {
+	font-size: 3.2vh;
+}
+
+.section__form__input {
+	font-size: 3vh;
+	display: block;
+	width: 100%;
+	margin: 1vh 0;
+	border: 1px solid lightgray;
+}
+
+.section__form__submit {
+	width: 60%;
+	font-size: 3vh;
+	border: 1px solid lightgray;
+}
+
+.section__form__text {
+	font-size: 2.2vh;
 }
