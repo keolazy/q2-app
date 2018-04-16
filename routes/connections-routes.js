@@ -49,6 +49,7 @@ router.post("/:userId", (req, res) => {
   if (req.session.user) {
     knex("connections")
       // if(req.body.user_id_owner && req.body.user_id_friend) {
+      .where("user_id_owner", req.session.user)
       .insert({
         user_id_owner: req.session.user,
         user_id_friend: req.params.userId
@@ -60,6 +61,8 @@ router.post("/:userId", (req, res) => {
         console.log("Found Connection Error:", error);
         res.send(error);
       });
+  } else {
+    res.redirect("/login.html");
   }
 });
 

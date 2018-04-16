@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ReadMe App</title>
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link rel="stylesheet" href="../public/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <header id="header">
+      <span id="title">Readme App</span>
+      <span id="hamburger-menu"><i class="fas fa-bars"></i></span>
+    </header>
+
+    <main id="main">
+      <section class="section">
+        <div class="section__title">This is a section-title</div>
+        <div class="section__subtitle">This is a section-subtitle</div>
+        <p class="section__text">
+          <h3><bold>My Events:</bold></h3>
+        </p>
+
+<!-- <div class='card__title'><%= ${event.name} ${event.description} ${event.location} ${event.date}  ${event.time_start} ${event.time_end}  </div> -->
+
+      <section class='section'>
+        <div class='section_title'>
+          <%= events.forEach(event => { %>
+            <div class='card'>
+              <div class='card__title'><%= `${event.name} ${event.date} ` %></div>
+                <ul class='card__list'>
+                  <% if(event.description) { %>
+                    <li>
+                      <span class='card__prop'>Description:</span>
+                      <%= event.description %>
+                    <li>
+                  <% } %>
+                  <% if(event.location) { %>
+                    <li>
+                      <span class='card__prop'>location:</span>
+                      <%= event.location %>
+                    <li>
+                  <% } %>
+                  <% if(event.date) { %>
+                    <li>
+                      <span class='card__prop'>Date:</span>
+                      <%= event.date %>
+                    <li>
+                  <% } %>
+
+                  <% if(event.tine_start) { %>
+                    <li>
+                      <span class='card__prop'>Starts:</span>
+                      <%= event.time_start %>
+                    <li>
+                  <% } %>
+                  <% if(event.time_end) { %>
+                    <li>
+                      <span class='card__prop'>Ends:</span>
+                      <%= event.time_end %>
+                    <li>
+                  <% } %>
+
+                  <% if(event.host_id) { %>
+                    <li>
+                      <span class='card__prop'>Hosted By:</span>
+                      <%= event.host_id %>
+                    <li>
+                  <% } %>
+                </ul>
+            </div>
+          <%> }) %>
+        </div>
+      </section>
+
+
+
+      <section class="section">
+        <div class="section__title">This is another section</div>
+        <div class="section__subtitle">Another section-subtitle</div>
+
+        <p class="section__text">
+          More hipster text. Lomo enamel pin health goth, cornhole unicorn quinoa bicycle rights biodiesel echo park hell of tilde.
+        </p>
+      </section>
+
+    </main>
+  </body>
+</html>
