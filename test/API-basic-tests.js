@@ -146,42 +146,42 @@ describe(`/connections`, () => {
         done(err);
       });
   });
-  it("should delete an item off collections array", done => {
-    let hexId = connections[0].id.toHexString(); // 1
-    request
-      .delete(`/connections/${hexId}`)
-      .expect(200)
-      .expect(res => {
-        expect(res.body.connections.id).toBe(hexId);
-      })
-      .end((err, res) => {
-        // any error encountered, it is returned.
-        if (err) {
-          return done(err);
-        }
-      });
-
-    // if no error, test goes further to query db
-    Connections.findById(hexId)
-      .then(todo => {
-        expect(connections.hexId).toNotExist(); // using the ID saved as value of hexID. test expects the matching id to not exist
-        done();
-      })
-      .catch(e => done(e));
-  });
-
-  // it("should return 404 if a connection is not found", done => {
-  //   let hexId = new ObjectId().toHexString();
+  // it("should delete an item off collections array", done => {
+  //   let hexId = connections[0].id.toHexString(); // 1
   //   request
-  //     .delete(`/coneccctions/${connections / hexId}`)
-  //     .expect(404)
-  //     .end(done);
-  // });
+  //     .delete(`/connections/${hexId}`)
+  //     .expect(200)
+  //     .expect(res => {
+  //       expect(res.body.connections.id).toBe(hexId);
+  //     })
+  //     .end((err, res) => {
+  //       // any error encountered, it is returned.
+  //       if (err) {
+  //         return done(err);
+  //       }
+  //     });
   //
-  // it("should return 404 for non-object ids", done => {
-  //   request
-  //     .delete("/connections/abc123")
-  //     .expect(404)
-  //     .end(done);
+  //   // if no error, test goes further to query db
+  //   Connections.findById(hexId)
+  //     .then(todo => {
+  //       expect(connections.hexId).toNotExist(); // using the ID saved as value of hexID. test expects the matching id to not exist
+  //       done();
+  //     })
+  //     .catch(e => done(e));
   // });
 });
+
+// it("should return 404 if a connection is not found", done => {
+//   let hexId = new ObjectId().toHexString();
+//   request
+//     .delete(`/coneccctions/${connections / hexId}`)
+//     .expect(404)
+//     .end(done);
+// });
+//
+// it("should return 404 for non-object ids", done => {
+//   request
+//     .delete("/connections/abc123")
+//     .expect(404)
+//     .end(done);
+// });
