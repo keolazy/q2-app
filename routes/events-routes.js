@@ -1,13 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const knex = require('../db/knex');
 const profiles = require('./profiles-routes');
 
 // const bodyParser = require('body-parser');
 // router.use(bodyParser.json());
 // router.use(bodyParser.urlencoded({extended:true}));
-
-router.use('/profiles', profiles);
 
 router.get('/', (req, res, next) => {
 	if (req.session.user) {
@@ -34,6 +32,8 @@ router.get('/:id', (req, res) => {
 			res.send(oneEvent);
 		});
 });
+
+router.use('/:id/profiles', profiles);
 
 router.post('/', (req, res) => {
 	knex('events')
