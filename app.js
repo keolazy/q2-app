@@ -10,6 +10,7 @@ const events = require('./routes/events-routes');
 const connections = require('./routes/connections-routes');
 const profiles = require('./routes/profiles-routes');
 const auth = require('./controllers/auth');
+const signup = require('./controllers/signup');
 
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
@@ -33,6 +34,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.use('/auth', auth);
+app.use('/signup', signup);
 app.use('/events', events);
 app.use('/connections', connections);
 app.use('/profiles', profiles);
