@@ -15,7 +15,7 @@ const signup = require('./controllers/signup');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method', { methods: ['POST', 'GET'] }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({ secret: `zubair's revenge`, cookie: {} }));
