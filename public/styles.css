@@ -155,8 +155,10 @@ html {
 
 .card__button {
 	min-height: 3.8vh;
-	flex-grow: 1;
-	font-size: 2.2vh;
+	width: 50%;
+	font-size: 2.5vh;
+	vertical-align: center;
+	text-align: center;
 }
 
 .card__button--red {
