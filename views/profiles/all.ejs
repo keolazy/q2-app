@@ -36,9 +36,9 @@
               <% } %>
             </ul>
             <div class="card__buttons">
-              <% let isConnected = connections.findIndex(conn => conn.user_id_friend == profile.id) %>
-              <% if (isConnected > 0) { %>
-                <a class="card__button card__button--red" href="/connections/<%= profile.id %>?_method=DELETE">Cancel Connection</a>
+              <% let connectionId = connections.findIndex(conn => conn.user_id_friend == profile.id) %>
+              <% if (connections[connectionId]) { %>
+                <a class="card__button card__button--red" href="/connections/<%= connections[connectionId].id %>?_method=DELETE">Cancel Connection</a>
               <% } else { %>
                 <a class="card__button card__button--green" href="/connections/<%= profile.id %>?_method=POST">Ask to Connect</a>
               <% } %>
