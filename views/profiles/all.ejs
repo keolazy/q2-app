@@ -19,7 +19,7 @@
     </header>
     <main id="main">
       <section class="section">
-        <div class="section__title">Attendees</div>
+        <div class="section__title">Event: <%= event.name %></div>
         <div class="section__subtitle">Here's who's attending:</div>
         <!-- <p class="section__text">
           We'll use this to check if you have an active session.
@@ -36,7 +36,7 @@
               <% } %>
             </ul>
             <div class="card__buttons">
-              <button class="card__button card__button--green">Want to Connect</button>
+              <button class="card__button card__button--green"><a href="/connections/<%= profile.id %>_method=POST">Ask to Connect</a></button>
               <button class="card__button card__button--red">Cancel Connection</button>
             </div>
           </div>
