@@ -24,7 +24,6 @@
         <!-- <p class="section__text">
           We'll use this to check if you have an active session.
         </p> -->
-        <% profiles.forEach(profile => { %>
           <% let connectionId = connections.findIndex(conn => conn.user_id_friend == profile.id) %>
           <div class="card">
             <div class="card__title"><a href="/events/<%= event.id%>/profiles/<%=profile.id%>"><%= `${profile.first} ${profile.last[0]}.` %></a></div>
@@ -88,7 +87,6 @@
               <% } %>
             </div>
           </div>
-        <% }) %>
       </section>
     </main>
     <script src="/shared_scripts.js" charset="utf-8"></script>
