@@ -28,6 +28,63 @@ html {
 #hamburger-menu {
 	font-size: 4.5vh;
 	height: 4.5vh;
+	cursor: pointer;
+}
+
+#hamburger-menu:hover {
+	color: aqua;
+}
+
+#nav {
+	color: black;
+	min-width: 80%;
+	position: fixed;
+	top: 0;
+	right: 0;
+	background: lightgray;
+	font-size: 8vh;
+	border-left: 2px solid black;
+	border-bottom: 2px solid black;
+	box-shadow: -3px 3px 2px rgba(0, 0, 0, 0.3);
+}
+
+.nav__hidden {
+	display: none;
+}
+
+.nav__visible {
+	display: block;
+}
+
+#nav__close-button {
+	font-size: 5vh;
+	position: absolute;
+	border: 1px solid black;
+	top: 0;
+	right: 0;
+	background: pink;
+	color: red;
+	cursor: pointer;
+}
+
+#nav__close-button:hover {
+	color: yellow;
+	background: red;
+}
+
+#nav__ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 2vh 2vw;
+}
+
+.nav__ul__li {
+	border-top: 1px solid black;
+	cursor: pointer;
+}
+
+.nav__ul__li:hover {
+	background: lightblue;
 }
 
 #main {
