@@ -5,8 +5,8 @@ module.exports = {
 		client: 'postgresql',
 		connection: {
 			database: 'readme-app-dev',
-			user:'postgres',
-			password:'coffeeDrinker'
+			user: 'postgres',
+			password: 'coffeeDrinker'
 		}
 	},
 
@@ -15,5 +15,10 @@ module.exports = {
 		connection: {
 			database: 'readme-app-test'
 		}
+	},
+
+	production: {
+		client: 'pg',
+		connection: process.env.DATABASE_URL + '?ssl=true'
 	}
 };
