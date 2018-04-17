@@ -91,7 +91,16 @@ router.get('/:profileID', (req, res, next) => {
 				.where('user_id_owner', req.session.user)
 				.andWhere('user_id_friend', profileData.userID)
 				.then(connectionData => {
-					res.json({ profile: profileData, event: eventData, connectionData: connectionData });
+					// res.json({
+					// 	profile: profileData,
+					// 	event: eventData,
+					// 	connection: connectionData
+					// });
+					res.render('profiles/single', {
+						profile: profileData,
+						event: eventData,
+						connectionData: connectionData
+					});
 				});
 
 			// res.render('profiles/single', {

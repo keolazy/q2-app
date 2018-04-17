@@ -27,7 +27,7 @@
         <% profiles.forEach(profile => { %>
           <% let connectionId = connections.findIndex(conn => conn.user_id_friend == profile.userID) %>
           <div class="card">
-            <div class="card__title"><a href="/events/<%= event.id%>/profiles/<%=profile.id%>"><%= `${profile.userFirst} ${profile.userLast[0]}.` %></a></div>
+            <div class="card__title"><a href="/events/<%= event.id%>/profiles/<%=profile.profileID%>"><%= `${profile.userFirst} ${profile.userLast[0]}.` %></a></div>
             <ul class="card__list">
 
                 <% if (profile.profileQuestions) { %>
