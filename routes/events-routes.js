@@ -7,6 +7,15 @@ const methodOverride = require('method-override');
 // router.use(bodyParser.json());
 // router.use(bodyParser.urlencoded({extended:true}));
 
+// router.get("/", (req, res, next) => {
+//   if (req.session.user) {
+//     next();
+//   } else {
+//     res.redirect("/login.html");
+//   }
+// });
+
+// Nathan was here
 // Should only return events that user is attending.
 router.get('/', (req, res) => {
 	if (req.session.user) {
@@ -96,7 +105,23 @@ router.put('/:id/edit', (req, res) => {
 		});
 });
 
-router.use('/:id/profiles', profiles);
+router.put('/:id/edit', (req, res) => {
+	knex('events')
+		.where({ id: req.params.id })
+		.update({
+			name: req.body.name,
+			description: req.body.description,
+			location: req.body.location,
+			date: req.body.date,
+			start_time: req.body.start_time,
+			end_time: req.body.end_time,
+			host_id: req.body.host_id
+		})
+		.then(() => {
+			res.send('you just updated the event');
+			console.log(req.body.name);
+		});
+});
 
 router.post('/', (req, res) => {
 	knex('events')
