@@ -22,12 +22,11 @@ router.get("/", (req, res) => {
         "events.location",
         "events.date",
         "events.start_time",
-        "events.end_time",
-        "events.host_id"
+        "events.end_time"
       )
-      .then(user_events => {
-        res.render("home.ejs");
-        // res.send(user_events);
+      .then(users_events => {
+        // res.json(user_events);
+        res.render("events/home", { users_events: users_events });
       });
   } else {
     res.redirect("/");
@@ -41,7 +40,8 @@ router.get("/all", (req, res) => {
       .select("*")
       .then(events => {
         if (events) {
-          res.send(events);
+          // res.send(events);
+          res.render("events/all", { events: events });
         } else {
           res.send("Connection invalid");
         }
@@ -61,7 +61,8 @@ router.get("/:id", (req, res) => {
     .select("*")
     .where({ id: req.params.id })
     .then(event => {
-      res.send(event);
+      // res.send(event);
+      res.render("events/single");
     });
 });
 
