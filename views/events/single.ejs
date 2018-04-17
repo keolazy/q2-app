@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ReadMe App</title>
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  </head>
+  <body>
+    <header id="header">
+      <span id="title">Readme App</span>
+      <span id="hamburger-menu"><i class="fas fa-bars"></i></span>
+      <nav id="nav" class="nav__hidden">
+        <button id="nav__close-button" type="button" name="button">X</button>
+        <ul id="nav__ul">
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="section">
+        <div class="section__title">
+          <a href="/events/"><< Back to Events</a>
+        </div>
+          <div class="card">
+            <div class="card__title"><%= event.name %></div>
+            <ul class="card__list">
+
+                <% if (event.description) { %>
+                  <li>
+                      <span class="card__prop">Description:</span>
+                      <%= event.description %>
+                  </li>
+                <% } %>
+
+                <% if (event.location) { %>
+                  <li>
+                      <span class="card__prop">Location:</span>
+                      <%= event.location %>
+                  </li>
+                <% } %>
+
+                <% if (event.date) { %>
+                  <li>
+                      <span class="card__prop">Date:</span>
+                      <%= event.date %>
+                  </li>
+                <% } %>
+
+                <% if (event.start_time) { %>
+                  <li>
+                      <span class="card__prop">Start Time:</span>
+                      <%= event.start_time %>
+                  </li>
+                <% } %>
+
+            </ul>
+            <div class="card__buttons">
+              <a class="card__button card__button--green" href="/events/<%= event.id%>/profiles">See Attendees</a>
+            </div>
+          </div>
+      </section>
+    </main>
+    <script src="/shared_scripts.js" charset="utf-8"></script>
+  </body>
+</html>
