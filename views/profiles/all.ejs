@@ -25,57 +25,57 @@
           We'll use this to check if you have an active session.
         </p> -->
         <% profiles.forEach(profile => { %>
-          <% let connectionId = connections.findIndex(conn => conn.user_id_friend == profile.id) %>
+          <% let connectionId = connections.findIndex(conn => conn.user_id_friend == profile.userID) %>
           <div class="card">
-            <div class="card__title"><a href="/events/<%= event.id%>/profiles/<%=profile.id%>"><%= `${profile.first} ${profile.last[0]}.` %></a></div>
+            <div class="card__title"><a href="/events/<%= event.id%>/profiles/<%=profile.id%>"><%= `${profile.userFirst} ${profile.userLast[0]}.` %></a></div>
             <ul class="card__list">
 
-                <% if (profile.questions) { %>
+                <% if (profile.profileQuestions) { %>
                   <li>
                       <span class="card__prop">Questions:</span>
-                      <%= profile.questions %>
+                      <%= profile.profileQuestions %>
                   </li>
                 <% } %>
 
-                <% if (profile.topics) { %>
+                <% if (profile.profileTopics) { %>
                   <li>
                       <span class="card__prop">Topics:</span>
-                      <%= profile.topics %>
+                      <%= profile.profileTopics %>
                   </li>
                 <% } %>
 
-                <% if (profile.job_status) { %>
+                <% if (profile.profileJob) { %>
                   <li>
                       <span class="card__prop">Job Status:</span>
-                      <%= profile.job_status %>
+                      <%= profile.profileJob %>
                   </li>
                 <% } %>
 
-                <% if (profile.noise_level) { %>
+                <% if (profile.profileNoise) { %>
                   <li>
                       <span class="card__prop">Noise Level:</span>
-                      <%= profile.noise_level %>
+                      <%= profile.profileNoise %>
                   </li>
                 <% } %>
 
-                <% if (profile.where_to_find) { %>
+                <% if (profile.profileWhereToFind) { %>
                   <li>
                       <span class="card__prop">Where to find me:</span>
-                      <%= profile.where_to_find %>
+                      <%= profile.profileWhereToFind %>
                   </li>
                 <% } %>
 
-                <% if (profile.ask_me) { %>
+                <% if (profile.profileAskMe) { %>
                   <li>
                       <span class="card__prop">Ask me:</span>
-                      <%= profile.ask_me %>
+                      <%= profile.profileAskMe %>
                   </li>
                 <% } %>
 
-                <% if (profile.personality) { %>
+                <% if (profile.profilePersonality) { %>
                   <li>
                       <span class="card__prop">Personality:</span>
-                      <%= profile.personality %>
+                      <%= profile.profilePersonality %>
                   </li>
                 <% } %>
 
@@ -84,7 +84,7 @@
               <% if (connections[connectionId]) { %>
                 <a class="card__button card__button--red" href="/connections/<%= connections[connectionId].id %>?_method=DELETE">Cancel Connection</a>
               <% } else { %>
-                <a class="card__button card__button--green" href="/connections/<%= profile.id %>?_method=POST">Ask to Connect</a>
+                <a class="card__button card__button--green" href="/connections/<%= profile.userID %>?_method=POST">Ask to Connect</a>
               <% } %>
             </div>
           </div>
