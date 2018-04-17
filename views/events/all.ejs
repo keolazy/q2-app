@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ReadMe App</title>
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <header id="header">
+      <span id="title">Readme App</span>
+      <span id="hamburger-menu"><i class="fas fa-bars"></i></span>
+      <nav id="nav" class="nav__hidden">
+        <button id="nav__close-button" type="button" name="button">X</button>
+        <ul id="nav__ul">
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="section">
+        <div class="section__title"><h1>All Events:</h1></div>
+        <div class="section__subtitle">section-subtitle</div>
+        <p class="section__text">
+          <h3><bold>All Events:</bold></h3>
+        </p>
+
+
+      <section class='section'>
+        <div class='section_title'>All Events Upcoming:</div>
+          <% events.forEach(event => { %>
+            <div class='card'>
+              <div class='card__title'><%= `${event.name} - ${event.date} ` %></div>
+                <ul class='card__list'>
+
+                  <% if(event.description) { %>
+                    <li>
+                      <span class='card__prop'>Description:</span>
+                      <%= event.description %>
+                    <li>
+                  <% } %>
+
+                  <% if(event.location) { %>
+                    <li>
+                      <span class='card__prop'>location:</span>
+                      <%= event.location %>
+                    <li>
+                  <% } %>
+
+                  <% if(event.date) { %>
+                    <li>
+                      <span class='card__prop'>Date:</span>
+                      <%= event.date %>
+                    <li>
+                  <% } %>
+
+                  <% if(event.start_time) { %>
+                    <li>
+                      <span class='card__prop'>Starts:</span>
+                      <%= event.start_time %>
+                    <li>
+                  <% } %>
+
+                  <% if(event.end_time) { %>
+                    <li>
+                      <span class='card__prop'>Ends:</span>
+                      <%= event.end_time %>
+                    <li>
+                  <% } %>
+                </ul>
+                <div class="card__buttons">
+                    <a class="card__button card__button--green" href="events/<%=events.id %>">Learn More</a>
+                </div>
+            </div>
+          <% }) %>
+      </section>
+
+
+
+      <section class="section">
+        <div class="section__title">This is another section</div>
+        <div class="section__subtitle">Another section-subtitle</div>
+
+        <p class="section__text">
+          Bottom of Home Page:
+        </p>
+      </section>
+
+    </main>
+  </body>
+</html>
