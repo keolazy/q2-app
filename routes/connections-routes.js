@@ -90,7 +90,7 @@ router.delete('/:id', (req, res) => {
 		.del()
 		.then(result => {
 			console.log(result);
-			res.send('results');
+			res.send(`Deleted ${result} record(s)`);
 		})
 		.catch(error => {
 			console.log('Found Connection Error:', error);
