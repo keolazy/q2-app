@@ -4,7 +4,9 @@ module.exports = {
 	development: {
 		client: 'postgresql',
 		connection: {
-			database: 'readme-app-dev'
+			database: 'readme-app-dev',
+			user:'postgres',
+			password:'coffeeDrinker'
 		}
 	},
 

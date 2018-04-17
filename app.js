@@ -12,6 +12,7 @@ const profiles = require('./routes/profiles-routes');
 const auth = require('./controllers/auth');
 const signup = require('./controllers/signup');
 
+
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
@@ -40,6 +41,7 @@ app.use('/connections', connections);
 app.use('/profiles', profiles);
 
 app.set('view engine', 'ejs');
+
 
 app.listen(PORT, () => {
 	console.log(`listening on port ${PORT}`);
