@@ -62,7 +62,7 @@ router.post('/:userId', (req, res) => {
 							user_id_owner: req.session.user,
 							user_id_friend: req.params.userId
 						})
-						.then(() => {
+						.then( () => {
 							res.send(
 								`Made a new connection between you (ID #${req.session.user}) and ID #${
 									req.params.userId
@@ -80,23 +80,94 @@ router.post('/:userId', (req, res) => {
 	}
 });
 
-// Delete single connection (only if this user is 'owner')
-router.delete('/:id', (req, res) => {
-	// if (req.session.user) {
+// // Delete single connection (only if this user is 'owner')
+// router.delete('/:id', (req, res) => {
+// 	// if (req.session.user) {
+// 	knex('connections')
+// 		.where('id', req.params.id) // req.params.id refers to URL input
+// 		// .where("user_id_owner", req.session.user)
+// 		.first()
+// 		.del()
+// 		.then(result => {
+// 			console.log(result);
+// 			res.send(`Deleted ${result} record(s)`);
+// 		})
+// 		.catch(error => {
+// 			console.log('Found Connection Error:', error);
+// 			res.send(error);
+// 		});
+// 	// }
+// });
+
+router.post('/:id/:friend_id', (req, res) => {
 	knex('connections')
-		.where('id', req.params.id) // req.params.id refers to URL input
-		// .where("user_id_owner", req.session.user)
-		.first()
-		.del()
-		.then(result => {
-			console.log(result);
-			res.send(`Deleted ${result} record(s)`);
+	.where({user_id_owner: req.params.id})
+	.andWhere({user_id_friend:req.params.friend_id})
+	.then( connections => {
+		if(connections.length) {
+			res.send('connection already exists')
+			return;
+		}
+		// Insert connection since it doesn't already exist.
+		knex('connections')
+		.insert({user_id_owner:req.params.id, user_id_friend:req.params.friend_id, mutual:false})
+		.then( connections => {
+			// currentConnectionId = connections[0].id;
+			knex('connections')
+			.where({user_id_owner:req.params.friend_id})
+			.andWhere({user_id_friend:req.params.id})
+			.then( mutualConnections => {
+				if(mutualConnections.length){ // THERE IS A MUTUAL CONNECTION!!!
+					knex('connections')
+					.update({mutual:true})
+					.where({
+						user_id_owner:req.params.friend_id,
+						user_id_friend:req.params.id
+					})
+					.then( (connections) => {
+						knex('connections')
+						.update({mutual:true})
+						.where({
+							user_id_friend:req.params.friend_id,
+							user_id_owner:req.params.id
+						})
+						.then(connections => {
+							res.send('you\'ve been matched')
+						})
+					})
+					.catch( err => res.send(err));
+				} else {
+					res.send('you like them more than they like you');
+				}
+			})
 		})
-		.catch(error => {
-			console.log('Found Connection Error:', error);
-			res.send(error);
-		});
-	// }
-});
+	})
+})
+
+router.delete('/:id/:friend_id', (req, res) => {
+	knex('connections')
+	.update({mutual:false})
+	.where({user_id_owner:req.params.friend_id})
+	.then( (stuff) => {
+		knex('connections')
+		.where({user_id_owner:req.params.id})
+		.del()
+		.then( (stuff) => {
+			res.send('cool')
+		})
+	})
+})
+
+
 
 module.exports = router;
+
+
+// ~ when a user adds a connection...
+// check if 2 users are friends with each other:
+//  their ID and FRIENDS_ID are added to connections table with MUTUAL set to false
+// check OWNER_IDs for FRIENDS_ID, if equal, check FRIENDS_ID for OWNER_ID, if equal, set MUTAL to true
+
+// ~ when a user deletes a connection...
+
+//  delete row where session user == OWNER_ID, and where OWNER_ID == FRIENDS_ID, set mutual to false
