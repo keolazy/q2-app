@@ -7,17 +7,7 @@ const methodOverride = require("method-override");
 // router.use(bodyParser.json());
 // router.use(bodyParser.urlencoded({extended:true}));
 
-// router.get("/", (req, res, next) => {
-//   if (req.session.user) {
-//     next();
-//   } else {
-//     res.redirect("/login.html");
-//   }
-// });
-
-// Nathan was here
 // Should only return events that user is attending.
-// maybe use       // .innerJoin("users", "users_events.user_id", "users.id")
 router.get("/", (req, res) => {
   if (req.session.user) {
     knex("users_events")
@@ -36,6 +26,7 @@ router.get("/", (req, res) => {
         "events.host_id"
       )
       .then(user_events => {
+        // res.render("home.ejs");
         res.send(user_events);
       });
   } else {
@@ -43,12 +34,34 @@ router.get("/", (req, res) => {
   }
 });
 
+// Return all events
+router.get("/all", (req, res) => {
+  if (req.session.user) {
+    knex("events")
+      .select("*")
+      .then(events => {
+        if (events) {
+          res.send(events);
+        } else {
+          res.send("Connection invalid");
+        }
+      })
+      .catch(error => {
+        console.log("Finding Connection Error:", error);
+        res.send(error);
+      });
+  } else {
+    res.redirect("/");
+  }
+});
+
+// Returns single event. No attendees
 router.get("/:id", (req, res) => {
   knex("events")
     .select("*")
     .where({ id: req.params.id })
-    .then(oneEvent => {
-      res.send(oneEvent);
+    .then(event => {
+      res.send(event);
     });
 });
 
