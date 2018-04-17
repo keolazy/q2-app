@@ -15,7 +15,6 @@ const methodOverride = require("method-override");
 //   }
 // });
 
-<<<<<<< Updated upstream
 // Nathan was here
 // Should only return events that user is attending.
 // maybe use       // .innerJoin("users", "users_events.user_id", "users.id")
@@ -42,15 +41,6 @@ router.get("/", (req, res) => {
   } else {
     res.redirect("/");
   }
-=======
-
-router.get('/', (req, res, next) => {
-	if (req.session.user) {
-		next();
-	} else {
-		res.redirect('/login.html');
-	}
->>>>>>> Stashed changes
 });
 
 router.get("/:id", (req, res) => {
@@ -91,9 +81,6 @@ router.put("/:id/edit", (req, res) => {
     });
 });
 
-<<<<<<< Updated upstream
-router.use("/:id/profiles", profiles);
-=======
 router.put('/:id/edit', (req, res) => {
 	// router.use(methodOverride('application/x-www-form-urlencoded'))
 	knex('events')
@@ -112,7 +99,6 @@ router.put('/:id/edit', (req, res) => {
 			console.log(req.body.name)
 		});
 })
->>>>>>> Stashed changes
 
 router.post("/", (req, res) => {
   knex("events")
