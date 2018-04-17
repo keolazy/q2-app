@@ -26,8 +26,8 @@ router.get("/", (req, res) => {
         "events.host_id"
       )
       .then(user_events => {
-        // res.render("home.ejs");
-        res.send(user_events);
+        res.render("home.ejs");
+        // res.send(user_events);
       });
   } else {
     res.redirect("/");
