@@ -69,11 +69,14 @@ router.get('/:id', (req, res) => {
 	knex('events')
 		.select('*')
 		.where({ id: req.params.id })
+		.first()
 		.then(event => {
 			// res.send(event);
 			res.render('events/single', { event });
 		});
 });
+
+router.use('/:id/profiles', profiles);
 
 router.get('/:id/edit', (req, res) => {
 	knex('events')

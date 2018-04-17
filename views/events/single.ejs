@@ -19,9 +19,11 @@
     </header>
     <main id="main">
       <section class="section">
-        <div class="section__title"><a href="/events/<%= event.id%>"><%= event.name %></a></div>
+        <div class="section__title">
+          <a href="/events/"><< Back to Events</a>
+        </div>
           <div class="card">
-            <div class="card__title">Details:</div>
+            <div class="card__title"><%= event.name %></div>
             <ul class="card__list">
 
                 <% if (event.description) { %>
@@ -54,7 +56,7 @@
 
             </ul>
             <div class="card__buttons">
-              <a href="/events/<%= event[0].id%>/profiles">See Attendees</a>
+              <a class="card__button card__button--green" href="/events/<%= event.id%>/profiles">See Attendees</a>
             </div>
           </div>
       </section>
