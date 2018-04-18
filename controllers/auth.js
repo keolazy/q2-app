@@ -16,7 +16,7 @@ router.post('/', (req, res, next) => {
 				.compare(givenPw, userOnFile.hashed_pw)
 				.then(success => {
 					req.session.user = userOnFile.id;
-					res.status(200).json('This is the right password!');
+					res.redirect('/events');
 				})
 				.catch(mismatch => {
 					// console.log(mismatch);
