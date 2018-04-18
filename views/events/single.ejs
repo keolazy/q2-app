@@ -19,11 +19,11 @@
     </header>
     <main id="main">
       <section class="section">
-        <div class="section__title">
+        <div class="section__subtitle">
           <a href="/events/">Events</a> >> <%= event.name %>
         </div>
           <div class="card">
-            <div class="card__title"><%= event.name %></div>
+            <div class="card__title">Details:</div>
             <ul class="card__list">
 
                 <% if (event.description) { %>
@@ -55,8 +55,15 @@
                 <% } %>
 
             </ul>
+
+            <% if (profile != null)  { %>
+                <p class="section__text">(You are signed up to attend this event)</p>
+            <% } else { %>
+              <p class="section__text">(You are not signed up for this event)</p>
+            <% } %>
             <div class="card__buttons">
               <a class="card__button card__button--green" href="/events/<%= event.id%>/profiles">See Attendees</a>
+              <a class="card__button card__button--blue" href="/events/<%= event.id%>/profiles/rsvp">Change RSVP</a>
             </div>
           </div>
       </section>

@@ -116,6 +116,7 @@ html {
 }
 
 .section__text {
+<<<<<<< HEAD
   font-size: 2.4vh;
 }
 
@@ -129,6 +130,20 @@ html {
 
 .card__small {
   width: 32vw;
+=======
+	font-size: 2.4vh;
+	flex-basis: 100%;
+}
+
+.card {
+	width: 86vw;
+	padding: 1vmin 1vmin;
+	box-sizing: border-box;
+	border: 2px solid gray;
+	margin: 1.2vh 2vw;
+	display: flex;
+	flex-flow: row wrap;
+>>>>>>> d97c12db75cb3b51837da7984bfadf0c247220f3
 }
 
 .card__title {
@@ -164,11 +179,20 @@ html {
 }
 
 .card__buttons {
+<<<<<<< HEAD
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   width: 100%;
+=======
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	width: 100%;
+	align-self: end;
+>>>>>>> d97c12db75cb3b51837da7984bfadf0c247220f3
 }
 
 .card__button {
@@ -195,6 +219,15 @@ html {
 
 .card__button--green:hover {
   background-color: #7affdb;
+}
+
+.card__button--blue {
+	background-color: lightblue;
+	color: blue;
+}
+
+.card__button--blue:hover {
+	background-color: aqua;
 }
 
 .section__form {

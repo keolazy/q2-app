@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>ReadMe App - New Event</title>
+    <title>ReadMe App - Edit Event</title>
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
@@ -19,7 +19,8 @@
     </header>
     <main id="main">
       <section class="section">
-        <div class="section__title"></div>
+        <div class="section__title">Edit this Event</div>
+        <div class="section__subtitle"><%= event.name %></div>
         <form class="section__form" action="/events/<%=event.id%>/edit?_method=PUT" method="post" enctype='application/x-www-form-urlencoded'>
           <!--  -->
           <fieldset class="section__form__fieldset">
@@ -36,7 +37,6 @@
             <input class="section__form__input" type="time" name="start_time" value="<%= event.start_time %>">
             <label class="section__form__label" for="end_time">End time</label>
             <input class="section__form__input" type="time" name="end_time" value="<%= event.end_time %>">
-            <!-- <p class="section__form__text">Don't have an account <a href="/signup.html">Sign up here</a></p> -->
             <button class="section__form__submit" type="submit">Submit</button>
           </fieldset>
         </form>

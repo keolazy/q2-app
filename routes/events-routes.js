@@ -3,21 +3,8 @@ const router = express.Router({ mergeParams: true });
 const knex = require("../db/knex");
 const profiles = require("./profiles-routes");
 const methodOverride = require("method-override");
-// const bodyParser = require('body-parser');
-// router.use(bodyParser.json());
-// router.use(bodyParser.urlencoded({extended:true}));
 
-// router.get("/", (req, res, next) => {
-//   if (req.session.user) {
-//     next();
-//   } else {
-//     res.redirect("/login.html");
-//   }
-// });
-
-// Nathan was here
-// Should only return events that user is attending.
-
+// Get all user's events
 router.get("/", (req, res) => {
   if (req.session.user) {
     knex("users_events")
@@ -35,7 +22,6 @@ router.get("/", (req, res) => {
         "events.end_time"
       )
       .then(users_events => {
-        // res.json(user_events);
         res.render("events/home", { users_events: users_events });
       });
   } else {
@@ -50,7 +36,6 @@ router.get("/all", (req, res) => {
       .select("*")
       .then(events => {
         if (events) {
-          // res.send(events);
           res.render("events/all", { events: events });
         } else {
           res.send("Connection invalid");
@@ -65,15 +50,55 @@ router.get("/all", (req, res) => {
   }
 });
 
-// Returns single event. No attendees
+// Get form to create new Event
+router.get("/new", (req, res) => {
+  if (res.locals.user) {
+    res.render("events/new");
+  } else {
+    res.status(400).json("You must be logged in to create a new event");
+  }
+});
+
+// Create new event -- redirects to edit your profile for it
+router.post("/", (req, res) => {
+  knex("events")
+    .insert({
+      name: req.body.name,
+      description: req.body.description,
+      location: req.body.location,
+      date: req.body.date,
+      start_time: req.body.start_time,
+      end_time: req.body.start_time,
+      host_id: res.locals.user
+    })
+    .then(result => {
+      // Lookup the new event that was just created:
+      let newEvent = knex("events")
+        .select("*")
+        .where({ host_id: res.locals.user, name: req.body.name })
+        .first();
+
+      // Get the Event ID from new event, then create a new Profile for it:
+      newEvent.then(event => {
+        res.redirect(`/events/${event.id}/profiles/new`);
+      });
+    });
+});
+
+// Returns detail for single event
 router.get("/:id", (req, res) => {
   knex("events")
     .select("*")
     .where({ id: req.params.id })
     .first()
     .then(event => {
-      // res.send(event);
-      res.render("events/single", { event });
+      knex("users_events")
+        .where({ user_id: res.locals.user, event_id: req.params.id })
+        .first()
+        .then(profile => {
+          console.log(JSON.stringify(profile));
+          res.render("events/single", { event: event, profile: profile });
+        });
     });
 });
 
