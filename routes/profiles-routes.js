@@ -7,7 +7,7 @@ router.use('/', (req, res, next) => {
 	if (req.session.user) {
 		next();
 	} else {
-		res.redirect('/login.html');
+		res.redirect('/login.ejs');
 	}
 });
 

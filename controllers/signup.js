@@ -4,7 +4,6 @@ const knex = require('../db/knex');
 const session = require('express-session');
 
 router.post('/', (req, res, next) => {
-	console.log(req.body);
 	let givenEmail = req.body.email;
 	let givenPw = req.body.password;
 
@@ -18,7 +17,8 @@ router.post('/', (req, res, next) => {
 					knex('users')
 						.insert({ email: givenEmail, hashed_pw: hash })
 						.then(success => {
-							res.status(200).send('Ok we created your account!');
+							// res.status(200).send('Ok we created your account!');
+								res.redirect('/login')
 						})
 						.catch(err => {
 							res.status(500).send(`We hit an error saving the user`);

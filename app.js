@@ -41,8 +41,9 @@ app.get('/', (req, res, next) => {
 app.get('/login', (req, res) => {
 	res.render('login');
 })
-
-
+app.get('/signup', (req, res) => {
+	res.render('signup');
+})
 
 app.use('/auth', auth);
 app.use('/signup', signup);
