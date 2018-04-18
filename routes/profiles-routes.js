@@ -4,10 +4,10 @@ const knex = require('../db/knex');
 
 router.use('/', (req, res, next) => {
 	console.log(`Session user id is: ${res.locals.user}`);
-	if (req.session.user) {
+	if (res.locals.user) {
 		next();
 	} else {
-		res.redirect('/login.ejs');
+		res.redirect('/login');
 	}
 });
 
