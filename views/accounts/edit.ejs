@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ReadMe App - Edit Event</title>
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  </head>
+  <body>
+    <%- include ../public/navBar.ejs %>
+    <main id="main">
+      <section class="section">
+        <div class="section__title">Edit Account</div>
+        <div class="section__subtitle"><%= user.name %></div>
+        <form class="section__form" action="/users/<%=user.id%>/edit?_method=PUT" method="post" enctype='application/x-www-form-urlencoded'>
+          <!--  -->
+          <fieldset class="section__form__fieldset">
+            <legend class="section__form__legend">Edit Account</legend>
+
+            <label class="section__form__label" for="first">First</label>
+            <input class="section__form__input" type="text" name="first" value="<%= user.first %>">
+            <label class="section__form__label" for="last">Last</label>
+            <input class="section__form__input" type="text" name="last" value="<%= user.last %>">
+
+            <label class="section__form__label" for="email">Email</label>
+            <input class="section__form__input" type="text" name="email" value="<%= user.email %>">
+
+            <label class="section__form__label" for="location">Location</label>
+            <input class="section__form__input" type="text" name="location" value="<%= user.location %>">
+
+            <label class="section__form__label" for="interests">Interests</label>
+            <input class="section__form__input" type="text" name="interests" value="<%= user.interests %>">
+
+            <label class="section__form__label" for="profession">Profession</label>
+            <input class="section__form__input" type="text" name="profession" value="<%= user.profession %>">
+
+            <label class="section__form__label" for="emailProfessional">Professional Email</label>
+            <input class="section__form__input" type="text" name="emailProfessional" value="<%= user.email_professional %>">
+
+            <label class="section__form__label" for="linkedin">LinkedIn</label>
+            <input class="section__form__input" type="text" name="linkedin" value="<%= user.linkedin %>">
+
+            <label class="section__form__label" for="facebook">Facebook</label>
+            <input class="section__form__input" type="text" name="Facebook" value="<%= user.facebook %>">
+
+            <label class="section__form__label" for="phone">Phone</label>
+            <input class="section__form__input" type="text" name="phone" value="<%= user.phone %>">
+
+
+            <button class="section__form__submit" type="submit">Submit</button>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+    <script src="/shared_scripts.js" charset="utf-8"></script>
+  </body>
+</html>

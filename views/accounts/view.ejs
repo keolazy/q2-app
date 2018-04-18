@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ReadMe App</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main id="main">
+      <section class="section">
+
+        <div class="section__title">
+          <a href="/users/">View Single Account</a><%= user.name %>
+
+        <div class="section__subtitle">
+          <a href="/users/">Events</a> >> <%= user.name %>
+
+        </div>
+          <div class="card">
+            <div class="card__title">Account Info:</div>
+            <ul class="card__list">
+
+                <% if (user.first) { %>
+                  <li>
+                      <span class="card__prop">First Name:</span>
+                      <%= user.first %>
+                  </li>
+                <% } %>
+
+                <% if (user.last) { %>
+                  <li>
+                      <span class="card__prop">Last Name:</span>
+                      <%= user.last %>
+                  </li>
+                <% } %>
+
+                <% if (user.email) { %>
+                  <li>
+                      <span class="card__prop">Email:</span>
+                      <%= user.email %>
+                  </li>
+                <% } %>
+
+                <% if (user.location) { %>
+                  <li>
+                      <span class="card__prop">Location:</span>
+                      <%= user.location %>
+                  </li>
+                <% } %>
+
+                <% if (user.location) { %>
+                  <li>
+                      <span class="card__prop">Interests:</span>
+                      <%= user.interests %>
+                  </li>
+                <% } %>
+                <% if (user.profession) { %>
+                  <li>
+                      <span class="card__prop">Profession:</span>
+                      <%= user.profession %>
+                  </li>
+                <% } %>
+
+                <% if (user.location) { %>
+                  <li>
+                      <span class="card__prop">Professional Email:</span>
+                      <%= user.email_professional %>
+                  </li>
+                <% } %>
+
+                <% if (user.linked) { %>
+                  <li>
+                      <span class="card__prop">LinkdIn:</span>
+                      <%= user.linkedin %>
+                  </li>
+                <% } %>
+
+                <% if (user.facebook) { %>
+                  <li>
+                      <span class="card__prop">Facebook:</span>
+                      <%= user.facebook %>
+                  </li>
+                <% } %>
+
+                <% if (user.phone) { %>
+                  <li>
+                      <span class="card__prop">Phone:</span>
+                      <%= user.phone %>
+                  </li>
+                <% } %>
+            </ul>
+
+            <% } %>
+          </div>
+      </section>
+    </main>
+  </body>
+</html>
