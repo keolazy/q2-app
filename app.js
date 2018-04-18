@@ -40,12 +40,9 @@ app.get('/', (req, res, next) => {
 
 app.get('/login', (req, res) => {
 	res.render('login');
-<<<<<<< HEAD
-})
+});
 app.get('/signup', (req, res) => {
 	res.render('signup');
-})
-=======
 });
 
 app.get('/logout', (req, res) => {
@@ -57,7 +54,6 @@ app.get('/logout', (req, res) => {
 		}
 	});
 });
->>>>>>> d97c12db75cb3b51837da7984bfadf0c247220f3
 
 app.use('/auth', auth);
 app.use('/signup', signup);
