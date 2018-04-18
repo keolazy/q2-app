@@ -117,6 +117,7 @@ html {
 
 .section__text {
 	font-size: 2.4vh;
+	flex-basis: 70%;
 }
 
 .card {
@@ -194,6 +195,15 @@ html {
 
 .card__button--green:hover {
 	background-color: #7affdb;
+}
+
+.card__button--blue {
+	background-color: lightblue;
+	color: blue;
+}
+
+.card__button--blue:hover {
+	background-color: aqua;
 }
 
 .section__form {
