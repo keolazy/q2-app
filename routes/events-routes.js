@@ -59,7 +59,7 @@ router.get('/new', (req, res) => {
 	}
 });
 
-// Submit POST from new event form
+// Create new event -- redirects to edit your profile for it
 router.post('/', (req, res) => {
 	knex('events')
 		.insert({
@@ -72,7 +72,36 @@ router.post('/', (req, res) => {
 			host_id: res.locals.user
 		})
 		.then(result => {
-			res.send(result);
+			// Lookup the new event that was just created:
+			let newEvent = knex('events')
+				.select('*')
+				.where({ host_id: res.locals.user, name: req.body.name })
+				.first();
+
+			// Get the Event ID from new event, then create a new Profile for it:
+			newEvent.then(event => {
+				let newEventID = event.id;
+
+				// Create new Profile with correct event_id
+				knex('users_events')
+					.insert({
+						user_id: res.locals.user,
+						event_id: newEventID
+					}) // Lookup profile that was just created:
+					.then(result => {
+						knex('users_events')
+							.where({
+								user_id: res.locals.user,
+								event_id: newEventID
+							})
+							.first()
+							.then(newCreatedProfile => {
+								// Lookup id for new Profile and send user to edit it:
+								let newProfileID = newCreatedProfile.id;
+								res.redirect(`/events/${newEventID}/profiles/${newProfileID}/edit`);
+							});
+					});
+			});
 		});
 });
 
