@@ -40,9 +40,17 @@ app.get('/', (req, res, next) => {
 
 app.get('/login', (req, res) => {
 	res.render('login');
-})
+});
 
-
+app.get('/logout', (req, res) => {
+	req.session.destroy(err => {
+		if (err) {
+			res.status(400).send(err);
+		} else {
+			res.redirect('/login');
+		}
+	});
+});
 
 app.use('/auth', auth);
 app.use('/signup', signup);
