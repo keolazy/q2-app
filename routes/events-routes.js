@@ -3,21 +3,8 @@ const router = express.Router({ mergeParams: true });
 const knex = require('../db/knex');
 const profiles = require('./profiles-routes');
 const methodOverride = require('method-override');
-// const bodyParser = require('body-parser');
-// router.use(bodyParser.json());
-// router.use(bodyParser.urlencoded({extended:true}));
 
-// router.get("/", (req, res, next) => {
-//   if (req.session.user) {
-//     next();
-//   } else {
-//     res.redirect("/login.html");
-//   }
-// });
-
-// Nathan was here
-// Should only return events that user is attending.
-
+// Get all user's events
 router.get('/', (req, res) => {
 	if (req.session.user) {
 		knex('users_events')
@@ -35,7 +22,6 @@ router.get('/', (req, res) => {
 				'events.end_time'
 			)
 			.then(users_events => {
-				// res.json(user_events);
 				res.render('events/home', { users_events: users_events });
 			});
 	} else {
@@ -50,7 +36,6 @@ router.get('/all', (req, res) => {
 			.select('*')
 			.then(events => {
 				if (events) {
-					// res.send(events);
 					res.render('events/all', { events: events });
 				} else {
 					res.send('Connection invalid');
@@ -65,20 +50,20 @@ router.get('/all', (req, res) => {
 	}
 });
 
-// Returns single event. No attendees
+// Returns detail for single event
 router.get('/:id', (req, res) => {
 	knex('events')
 		.select('*')
 		.where({ id: req.params.id })
 		.first()
 		.then(event => {
-			// res.send(event);
 			res.render('events/single', { event });
 		});
 });
 
 router.use('/:id/profiles', profiles);
 
+// Edit form for single event
 router.get('/:id/edit', (req, res) => {
 	knex('events')
 		.select('*')
@@ -94,6 +79,7 @@ router.get('/:id/edit', (req, res) => {
 		});
 });
 
+// Commit edits on single event
 router.put('/:id/edit', (req, res) => {
 	knex('events')
 		.where({ id: req.params.id })
@@ -115,6 +101,7 @@ router.put('/:id/edit', (req, res) => {
 		});
 });
 
+// Create new event
 router.post('/', (req, res) => {
 	knex('events')
 		.insert({
@@ -130,23 +117,6 @@ router.post('/', (req, res) => {
 			res.send(result);
 		});
 });
-
-// router.patch('/:id', (req, res) => {
-// 	knex('events')
-// 		.where({ id: req.params.id })
-// 		.update({
-// 			name: req.body.name,
-// 			description: req.body.description,
-// 			location: req.body.location,
-// 			date: req.body.date,
-// 			start_time: req.body.start_time,
-// 			end_time: req.body.start_time,
-// 			host_id: req.body.host_id
-// 		})
-// 		.then(() => {
-// 			res.send('dang fool');
-// 		});
-// });
 
 router.delete('/:id', (req, res) => {
 	knex('events')
