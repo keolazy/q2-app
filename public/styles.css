@@ -125,6 +125,8 @@ html {
 	box-sizing: border-box;
 	border: 2px solid gray;
 	margin: 1.2vh 2vw;
+	display: flex;
+	flex-flow: row wrap;
 }
 
 .card__title {
@@ -165,6 +167,7 @@ html {
 	flex-wrap: nowrap;
 	justify-content: center;
 	width: 100%;
+	align-self: end;
 }
 
 .card__button {
