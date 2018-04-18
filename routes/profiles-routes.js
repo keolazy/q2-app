@@ -44,9 +44,7 @@ router.get('/', (req, res, next) => {
 			let profileData = data[0];
 			let eventData = data[1];
 			let connectionData = data[2];
-			// console.log(`Profiles: ` + JSON.stringify(profileData));
-			// console.log(`Event: ` + JSON.stringify(eventData));
-			// console.log(`Connections: ` + JSON.stringify(connectionData));
+
 			res.render('profiles/all', {
 				userID: res.locals.user,
 				event: eventData,
