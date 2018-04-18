@@ -76,9 +76,9 @@
             </ul>
             <div class="card__buttons">
               <% if (connectionData.length) { %>
-                <a class="card__button card__button--red" href="/connections/<%= connectionData[0].id %>?_method=DELETE">Cancel Connection</a>
+                <a class="card__button card__button--red" href="/connections/<%= userID %>/<%= profile.userID %>?_method=DELETE">Cancel Connection</a>
               <% } else { %>
-                <a class="card__button card__button--green" href="/connections/<%= profile.userID %>?_method=POST">Ask to Connect</a>
+                <a class="card__button card__button--green" href="/connections/<%= userID %>/<%= profile.userID %>?_method=POST">Ask to Connect</a>
               <% } %>
             </div>
           </div>

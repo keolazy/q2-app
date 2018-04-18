@@ -12,7 +12,6 @@ const profiles = require('./routes/profiles-routes');
 const auth = require('./controllers/auth');
 const signup = require('./controllers/signup');
 
-
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
@@ -23,6 +22,12 @@ app.use(session({ secret: `zubair's revenge`, cookie: {} }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(function(req, res, next) {
+	res.locals.user = req.session.user;
+	console.log(`Res.locals.user set to: ${res.locals.user}`);
+	next();
+});
 
 app.get('/', (req, res, next) => {
 	console.log(req.session);
@@ -41,7 +46,6 @@ app.use('/connections', connections);
 app.use('/profiles', profiles);
 
 app.set('view engine', 'ejs');
-
 
 app.listen(PORT, () => {
 	console.log(`listening on port ${PORT}`);
