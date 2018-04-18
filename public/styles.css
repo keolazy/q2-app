@@ -258,8 +258,19 @@ html {
 		box-sizing: content-box;
 	}
 
+	.section {
+		display: flex;
+		flex-flow: row wrap;
+	}
+
+	.section__title,
+	.section__subtitle {
+		flex-basis: 80%;
+	}
+
 	.card {
 		margin: 3vmin auto;
 		width: 70vw;
+		max-width: 450px;
 	}
 }
