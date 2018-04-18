@@ -86,44 +86,32 @@ router.get('/:id/edit', (req, res) => {
 		.first()
 		.then(result => {
 			console.log(result);
-			res.render('events/edit', { event: result });
-		});
-});
-
-router.put('/:id/edit', (req, res) => {
-	router.use(methodOverride('application/x-www-form-urlencoded'));
-	knex('events')
-		.where({ id: req.params.id })
-		.update({
-			name: req.body.name,
-			description: req.body.description,
-			location: req.body.location,
-			date: req.body.date,
-			start_time: req.body.start_time,
-			end_time: req.body.end_time,
-			host_id: req.body.host_id
-		})
-		.then(() => {
-			res.send('you just updated the event');
-			console.log(req.body.name);
+			if (result.host_id == res.locals.user) {
+				res.render('events/edit', { event: result });
+			} else {
+				res.status(400).json('You have to be the host to edit an event.');
+			}
 		});
 });
 
 router.put('/:id/edit', (req, res) => {
 	knex('events')
 		.where({ id: req.params.id })
-		.update({
-			name: req.body.name,
-			description: req.body.description,
-			location: req.body.location,
-			date: req.body.date,
-			start_time: req.body.start_time,
-			end_time: req.body.end_time,
-			host_id: req.body.host_id
-		})
-		.then(() => {
-			res.send('you just updated the event');
-			console.log(req.body.name);
+		.first()
+		.then(result => {
+			console.log(`Result host ID is: ${result.host_id}`);
+			console.log(`Res.locals.user is: ${res.locals.user}`);
+			if (result.host_id == res.locals.user) {
+				knex('events')
+					.where({ id: req.params.id })
+					.update(req.body)
+					.then(result => {
+						console.log(`Event updated.`);
+						res.redirect(`/events/${req.params.id}`);
+					});
+			} else {
+				res.status(400).json('You have to be the host to edit an event.');
+			}
 		});
 });
 
@@ -142,28 +130,39 @@ router.post('/', (req, res) => {
 			res.send(result);
 		});
 });
-router.patch('/:id', (req, res) => {
-	knex('events')
-		.where({ id: req.params.id })
-		.update({
-			name: req.body.name,
-			description: req.body.description,
-			location: req.body.location,
-			date: req.body.date,
-			start_time: req.body.start_time,
-			end_time: req.body.start_time,
-			host_id: req.body.host_id
-		})
-		.then(() => {
-			res.send('dang fool');
-		});
-});
+
+// router.patch('/:id', (req, res) => {
+// 	knex('events')
+// 		.where({ id: req.params.id })
+// 		.update({
+// 			name: req.body.name,
+// 			description: req.body.description,
+// 			location: req.body.location,
+// 			date: req.body.date,
+// 			start_time: req.body.start_time,
+// 			end_time: req.body.start_time,
+// 			host_id: req.body.host_id
+// 		})
+// 		.then(() => {
+// 			res.send('dang fool');
+// 		});
+// });
+
 router.delete('/:id', (req, res) => {
 	knex('events')
 		.where({ id: req.params.id })
-		.del()
-		.then(() => {
-			res.send('party times over');
+		.first()
+		.then(result => {
+			if (result.host_id == res.locals.user) {
+				knex('events')
+					.where({ id: req.params.id })
+					.del()
+					.then(deleteResult => {
+						res.status(200).json('Event deleted!');
+					});
+			} else {
+				res.status(400).json('You have to be the host to delete an event');
+			}
 		});
 });
 
