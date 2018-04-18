@@ -5,16 +5,28 @@ const bodyParser = require('body-parser');
 
 // Returns all connections *for this user*
 router.get('/', (req, res) => {
-	if (req.session.user) {
+	if (res.locals.user) {
 		knex('connections')
-			.select('*')
-			.where('user_id_owner', req.session.user)
+			.where({ user_id_owner: +res.locals.user, mutual: true })
+			.innerJoin('users', 'users.id', 'connections.user_id_friend')
+			.select({
+				userID: 'users.id',
+				userFirst: 'users.first',
+				userLast: 'users.last',
+				userEmail: 'users.email',
+				userLocation: 'users.location',
+				userInterests: 'users.interests',
+				userProfession: 'users.profession',
+				userProfEmail: 'users.email_professional',
+				userLinkedIn: 'users.linkedin',
+				userFacebook: 'users.facebook',
+				userPhone: 'users.phone'
+			})
 			.then(connections => {
 				res.send(connections);
 			});
 	} else {
-		console.log('You need to login BRO');
-		res.redirect('/');
+		res.status(400).json(`Can't get connections without being logged in`);
 	}
 });
 
