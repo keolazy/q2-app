@@ -10,20 +10,24 @@ router.get('/', (req, res) => {
 			.where({ user_id_owner: +res.locals.user, mutual: true })
 			.innerJoin('users', 'users.id', 'connections.user_id_friend')
 			.select({
-				userID: 'users.id',
-				userFirst: 'users.first',
-				userLast: 'users.last',
-				userEmail: 'users.email',
-				userLocation: 'users.location',
-				userInterests: 'users.interests',
-				userProfession: 'users.profession',
-				userProfEmail: 'users.email_professional',
-				userLinkedIn: 'users.linkedin',
-				userFacebook: 'users.facebook',
-				userPhone: 'users.phone'
+				id: 'users.id',
+				first: 'users.first',
+				last: 'users.last',
+				email: 'users.email',
+				location: 'users.location',
+				interests: 'users.interests',
+				profession: 'users.profession',
+				profEmail: 'users.email_professional',
+				linkedIn: 'users.linkedin',
+				facebook: 'users.facebook',
+				phone: 'users.phone'
 			})
 			.then(connections => {
-				res.send(connections);
+				res.render('connections', {
+					userID: res.locals.user,
+					connections: connections
+				});
+				// res.send(connections);
 			});
 	} else {
 		res.status(400).json(`Can't get connections without being logged in`);
