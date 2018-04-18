@@ -55,6 +55,12 @@
                 <% } %>
 
             </ul>
+
+            <% if (profile.user_id != null)  { %>
+                <p class="section__text">(You are signed up to attend this event)</p>
+            <% } else { %>
+              <p class="section__text">(You are not signed up for this event)</p>
+            <% } %>
             <div class="card__buttons">
               <a class="card__button card__button--green" href="/events/<%= event.id%>/profiles">See Attendees</a>
               <a class="card__button card__button--blue" href="/events/<%= event.id%>/profiles/rsvp">Change RSVP</a>

@@ -92,7 +92,13 @@ router.get('/:id', (req, res) => {
 		.where({ id: req.params.id })
 		.first()
 		.then(event => {
-			res.render('events/single', { event });
+			knex('users_events')
+				.where({ user_id: res.locals.user, event_id: req.params.id })
+				.first()
+				.then(profile => {
+					console.log(JSON.stringify(profile));
+					res.render('events/single', { event: event, profile: profile });
+				});
 		});
 });
 
