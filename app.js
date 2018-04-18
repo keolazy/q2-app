@@ -30,14 +30,19 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', (req, res, next) => {
-	console.log(req.session);
 	if (req.session.user) {
 		res.redirect('/protected-generic.html');
 	} else {
 		console.log('No session found on this request.');
-		res.redirect('/login.html');
+		res.redirect('/login');
 	}
 });
+
+app.get('/login', (req, res) => {
+	res.render('login');
+})
+
+
 
 app.use('/auth', auth);
 app.use('/signup', signup);
