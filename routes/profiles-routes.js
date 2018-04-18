@@ -68,7 +68,7 @@ router.get('/rsvp', (req, res) => {
 
 	checkIfExisting.then(profile => {
 		// If RSVP already exists, just edit it
-		if (profile.length) {
+		if (profile != null) {
 			res.redirect(`/events/${req.params.id}/profiles/${profile.id}/edit`);
 		} else {
 			res.redirect(`/events/${req.params.id}/profiles/new`);
@@ -103,6 +103,28 @@ router.get('/new', (req, res) => {
 					res.redirect(`/events/${newEventID}/profiles/${newProfileID}/edit`);
 				});
 		});
+});
+
+router.delete('/:profileID', (req, res) => {
+	let existingRecord = knex('users_events')
+		.where({
+			event_id: req.params.id,
+			user_id: res.locals.user
+		})
+		.first();
+
+	existingRecord.then(profileRecord => {
+		knex('users_events')
+			.where({
+				event_id: req.params.id,
+				user_id: res.locals.user
+			})
+			.first()
+			.del()
+			.then(result => {
+				res.status(200).json('Profile deleted!');
+			});
+	});
 });
 
 router.get('/:profileID', (req, res, next) => {
