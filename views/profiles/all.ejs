@@ -21,9 +21,6 @@
       <section class="section">
         <div class="section__title"><a href="/events/">Events</a> >> <a href="/events/<%= event.id%>"><%= event.name %></a> >> Attendees</div>
         <div class="section__subtitle">Here's who's attending:</div>
-        <!-- <p class="section__text">
-          We'll use this to check if you have an active session.
-        </p> -->
         <% profiles.forEach(profile => { %>
           <% let connectionId = connections.findIndex(conn => conn.user_id_friend == profile.userID) %>
           <div class="card">
