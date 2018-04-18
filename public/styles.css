@@ -285,6 +285,11 @@ html {
 		box-sizing: content-box;
 	}
 
+	.nav__ul__li a {
+		text-decoration: none;
+		color: #fff;
+	}
+
 	.section {
 		display: flex;
 		flex-flow: row wrap;
