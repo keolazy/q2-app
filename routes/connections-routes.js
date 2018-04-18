@@ -169,7 +169,7 @@ router.post('/:id/:friend_id', (req, res) => {
 				.insert({
 					user_id_owner: req.params.id,
 					user_id_friend: req.params.friend_id,
-					mutual: true
+					mutual: false
 				})
 				.then(result => {
 					res.status(200).json('New connection created.');
@@ -228,7 +228,6 @@ router.post('/:id/:friend_id', (req, res) => {
 });
 
 router.delete('/:owner_id/:friend_id', (req, res) => {
-	console.log('hi there');
 	knex('connections')
 		.where({ user_id_owner: req.params.friend_id, user_id_friend: req.params.owner_id })
 		.update({ mutual: false })
@@ -238,7 +237,7 @@ router.delete('/:owner_id/:friend_id', (req, res) => {
 				.where({ user_id_owner: req.params.owner_id, user_id_friend: req.params.friend_id })
 				.del()
 				.then(deleteResult => {
-					console.log(`Result of delets: ${deleteResult}`);
+					console.log(`Result of delete: ${deleteResult}`);
 					res.status(200).json('Record deleted for you');
 				});
 		});
