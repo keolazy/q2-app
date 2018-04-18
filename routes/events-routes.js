@@ -50,6 +50,32 @@ router.get('/all', (req, res) => {
 	}
 });
 
+// Get form to create new Event
+router.get('/new', (req, res) => {
+	if (res.locals.user) {
+		res.render('events/new');
+	} else {
+		res.status(400).json('You must be logged in to create a new event');
+	}
+});
+
+// Submit POST from new event form
+router.post('/', (req, res) => {
+	knex('events')
+		.insert({
+			name: req.body.name,
+			description: req.body.description,
+			location: req.body.location,
+			date: req.body.date,
+			start_time: req.body.start_time,
+			end_time: req.body.start_time,
+			host_id: res.locals.user
+		})
+		.then(result => {
+			res.send(result);
+		});
+});
+
 // Returns detail for single event
 router.get('/:id', (req, res) => {
 	knex('events')
@@ -98,23 +124,6 @@ router.put('/:id/edit', (req, res) => {
 			} else {
 				res.status(400).json('You have to be the host to edit an event.');
 			}
-		});
-});
-
-// Create new event
-router.post('/', (req, res) => {
-	knex('events')
-		.insert({
-			name: req.body.name,
-			description: req.body.description,
-			location: req.body.location,
-			date: req.body.date,
-			start_time: req.body.start_time,
-			end_time: req.body.start_time,
-			host_id: req.body.host_id
-		})
-		.then(result => {
-			res.send(result);
 		});
 });
 
