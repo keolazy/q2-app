@@ -80,27 +80,7 @@ router.post('/', (req, res) => {
 
 			// Get the Event ID from new event, then create a new Profile for it:
 			newEvent.then(event => {
-				let newEventID = event.id;
-
-				// Create new Profile with correct event_id
-				knex('users_events')
-					.insert({
-						user_id: res.locals.user,
-						event_id: newEventID
-					}) // Lookup profile that was just created:
-					.then(result => {
-						knex('users_events')
-							.where({
-								user_id: res.locals.user,
-								event_id: newEventID
-							})
-							.first()
-							.then(newCreatedProfile => {
-								// Lookup id for new Profile and send user to edit it:
-								let newProfileID = newCreatedProfile.id;
-								res.redirect(`/events/${newEventID}/profiles/${newProfileID}/edit`);
-							});
-					});
+				res.redirect(`/events/${event.id}/profiles/new`);
 			});
 		});
 });
@@ -112,7 +92,13 @@ router.get('/:id', (req, res) => {
 		.where({ id: req.params.id })
 		.first()
 		.then(event => {
-			res.render('events/single', { event });
+			knex('users_events')
+				.where({ user_id: res.locals.user, event_id: req.params.id })
+				.first()
+				.then(profile => {
+					console.log(JSON.stringify(profile));
+					res.render('events/single', { event: event, profile: profile });
+				});
 		});
 });
 

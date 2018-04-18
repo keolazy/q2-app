@@ -44,9 +44,7 @@ router.get('/', (req, res, next) => {
 			let profileData = data[0];
 			let eventData = data[1];
 			let connectionData = data[2];
-			// console.log(`Profiles: ` + JSON.stringify(profileData));
-			// console.log(`Event: ` + JSON.stringify(eventData));
-			// console.log(`Connections: ` + JSON.stringify(connectionData));
+
 			res.render('profiles/all', {
 				userID: res.locals.user,
 				event: eventData,
@@ -58,6 +56,75 @@ router.get('/', (req, res, next) => {
 			console.log(err);
 			res.status(500).send(err);
 		});
+});
+
+router.get('/rsvp', (req, res) => {
+	let checkIfExisting = knex('users_events')
+		.where({
+			event_id: req.params.id,
+			user_id: res.locals.user
+		})
+		.first();
+
+	checkIfExisting.then(profile => {
+		// If RSVP already exists, just edit it
+		if (profile != null) {
+			res.redirect(`/events/${req.params.id}/profiles/${profile.id}/edit`);
+		} else {
+			res.redirect(`/events/${req.params.id}/profiles/new`);
+		}
+	});
+});
+
+router.get('/new', (req, res) => {
+	console.log(`In the profiles/new route now`);
+	console.log(`Res.locals.user is: ${res.locals.user}`);
+	console.log(`Req params are: ${JSON.stringify(req.params)}`);
+
+	let newEventID = req.params.id;
+
+	// Create new Profile with correct event_id
+	knex('users_events')
+		.insert({
+			user_id: res.locals.user,
+			event_id: newEventID
+		}) // Lookup profile that was just created:
+		.then(result => {
+			knex('users_events')
+				.where({
+					user_id: res.locals.user,
+					event_id: newEventID
+				})
+				.first()
+				.then(newCreatedProfile => {
+					console.log(`Profile that got created is: ${newCreatedProfile}`);
+					// Lookup id for new Profile and send user to edit it:
+					let newProfileID = newCreatedProfile.id;
+					res.redirect(`/events/${newEventID}/profiles/${newProfileID}/edit`);
+				});
+		});
+});
+
+router.delete('/:profileID', (req, res) => {
+	let existingRecord = knex('users_events')
+		.where({
+			event_id: req.params.id,
+			user_id: res.locals.user
+		})
+		.first();
+
+	existingRecord.then(profileRecord => {
+		knex('users_events')
+			.where({
+				event_id: req.params.id,
+				user_id: res.locals.user
+			})
+			.first()
+			.del()
+			.then(result => {
+				res.status(200).json('Profile deleted!');
+			});
+	});
 });
 
 router.get('/:profileID', (req, res, next) => {
