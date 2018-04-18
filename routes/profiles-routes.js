@@ -48,6 +48,7 @@ router.get('/', (req, res, next) => {
 			// console.log(`Event: ` + JSON.stringify(eventData));
 			// console.log(`Connections: ` + JSON.stringify(connectionData));
 			res.render('profiles/all', {
+				userID: res.locals.user,
 				event: eventData,
 				profiles: profileData,
 				connections: connectionData
@@ -83,7 +84,7 @@ router.get('/:profileID', (req, res, next) => {
 	Promise.all([theProfile, theEvent])
 		.then(data => {
 			let profileData = data[0];
-			console.log(`Profile data: ${JSON.stringify(profileData)}`);
+			// console.log(`Profile data: ${JSON.stringify(profileData)}`);
 			let eventData = data[1];
 			// console.log(`Event Data: ${eventData}`);
 
@@ -97,6 +98,7 @@ router.get('/:profileID', (req, res, next) => {
 					// 	connection: connectionData
 					// });
 					res.render('profiles/single', {
+						userID: res.locals.user,
 						profile: profileData,
 						event: eventData,
 						connectionData: connectionData

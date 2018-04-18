@@ -24,7 +24,8 @@
 		"supertest": "^3.0.0"
 	},
 	"scripts": {
-		"test": "mocha --exit test"
+		"test": "mocha --exit test",
+		"start": "node app.js"
 	},
 	"repository": {
 		"type": "git",

@@ -128,8 +128,22 @@ html {
 }
 
 .card__title {
-	font-size: bold;
+	font-weight: bold;
 	font-size: 3vh;
+}
+
+.card__text--big {
+	font-weight: bold;
+	font-size: 2.3vh;
+}
+
+.card__text--small {
+	font-weight: normal;
+	font-size: 2vh;
+}
+
+.card__text--centered {
+	text-align: center;
 }
 
 .card__list {
@@ -258,8 +272,24 @@ html {
 		box-sizing: content-box;
 	}
 
+	.section {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: center;
+	}
+
+	.section__title,
+	.section__subtitle {
+		flex-basis: 80%;
+	}
+
+	.section__form {
+		max-width: 600px;
+	}
+
 	.card {
 		margin: 3vmin auto;
 		width: 70vw;
+		max-width: 450px;
 	}
 }

@@ -19,7 +19,7 @@
     </header>
     <main id="main">
       <section class="section">
-        <div class="section__title">Event: <a href="/events/<%= event.id%>"><%= event.name %></a></div>
+        <div class="section__title"><a href="/events/">Events</a> >> <a href="/events/<%= event.id%>"><%= event.name %></a> >> Attendees</div>
         <div class="section__subtitle">Here's who's attending:</div>
         <!-- <p class="section__text">
           We'll use this to check if you have an active session.
@@ -81,9 +81,9 @@
             </ul>
             <div class="card__buttons">
               <% if (connections[connectionId]) { %>
-                <a class="card__button card__button--red" href="/connections/<%= connections[connectionId].id %>?_method=DELETE">Cancel Connection</a>
+                <a class="card__button card__button--red" href="/connections/<%= userID %>/<%= profile.userID %>?_method=DELETE">Cancel Connection</a>
               <% } else { %>
-                <a class="card__button card__button--green" href="/connections/<%= profile.userID %>?_method=POST">Ask to Connect</a>
+                <a class="card__button card__button--green" href="/connections/<%= userID %>/<%= profile.userID %>?_method=POST">Ask to Connect</a>
               <% } %>
             </div>
           </div>
