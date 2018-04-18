@@ -21,17 +21,10 @@
     <main id="main">
       <section class="section">
         <div class="section__title"><h1>All Events:</h1></div>
-        <div class="section__subtitle">section-subtitle</div>
-        <p class="section__text">
-          <h3><bold>All Events:</bold></h3>
-        </p>
 
-
-      <section class='section'>
-        <div class='section_title'>All Events Upcoming:</div>
           <% events.forEach(event => { %>
             <div class='card'>
-              <div class='card__title'><%= `${event.name} - ${event.date} ` %></div>
+              <div class='card__title'><a href="/events/<%=event.id %>"><%= event.name %></a> - <%= event.date %></div>
                 <ul class='card__list'>
 
                   <% if(event.description) { %>
@@ -70,21 +63,10 @@
                   <% } %>
                 </ul>
                 <div class="card__buttons">
-                    <a class="card__button card__button--green" href="events/<%=events.id %>">Learn More</a>
+                    <a class="card__button card__button--green" href="/events/<%=events.id %>">Learn More</a>
                 </div>
             </div>
           <% }) %>
-      </section>
-
-
-
-      <section class="section">
-        <div class="section__title">This is another section</div>
-        <div class="section__subtitle">Another section-subtitle</div>
-
-        <p class="section__text">
-          Bottom of Home Page:
-        </p>
       </section>
 
     </main>

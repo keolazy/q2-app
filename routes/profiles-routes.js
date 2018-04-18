@@ -84,7 +84,7 @@ router.get('/:profileID', (req, res, next) => {
 	Promise.all([theProfile, theEvent])
 		.then(data => {
 			let profileData = data[0];
-			console.log(`Profile data: ${JSON.stringify(profileData)}`);
+			// console.log(`Profile data: ${JSON.stringify(profileData)}`);
 			let eventData = data[1];
 			// console.log(`Event Data: ${eventData}`);
 
