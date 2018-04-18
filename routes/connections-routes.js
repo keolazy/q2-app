@@ -157,7 +157,6 @@ router.post('/:id/:friend_id', (req, res) => {
 							user_id_owner: req.params.friend_id,
 							user_id_friend: req.params.id
 						})
-<<<<<<< Updated upstream
 						.update({ mutual: true })
 						.then(result => {
 							res.status(200).json('Created a new mutual connection');
@@ -177,32 +176,6 @@ router.post('/:id/:friend_id', (req, res) => {
 				});
 		}
 	});
-=======
-					})
-					.catch( err => res.send(err));
-				} else {
-					res.send('you like them more than they like you');
-				}
-			})
-		})
-	})
-})
-
-router.delete('/:id/:friend_id', (req, res) => {
-	knex('connections')
-	.update({mutual:false})
-	.where({user_id_owner:req.params.friend_id})
-	.andWhere({user_id_friend:req.params.id})
-	.then( (stuff) => {
-		knex('connections')
-		.where({user_id_owner:req.params.id})
-		.del()
-		.then( (stuff) => {
-			res.send('cool')
-		})
-	})
-})
->>>>>>> Stashed changes
 
 	// knex('connections')
 	// 	.where({ user_id_owner: req.params.id, user_id_friend: req.params.friend_id })
