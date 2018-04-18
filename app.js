@@ -30,6 +30,9 @@ app.use(function(req, res, next) {
   console.log(`Res.locals.user set to: ${res.locals.user}`);
   next();
 });
+app.get('/signup', (req, res) => {
+	res.render('signup');
+});
 
 app.get("/", (req, res, next) => {
   console.log(req.session);
