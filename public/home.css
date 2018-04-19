@@ -1,0 +1,41 @@
+.card__hero {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  border: none;
+}
+
+.card__hero__img {
+  flex-grow: 1;
+  max-width: 40%;
+  max-height: 40%;
+  border-radius: 30%;
+  border: 2px solid black;
+}
+
+.card__hero__right {
+  flex-grow: 2;
+  font-size: 5vh;
+  max-height: 90%;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.card__hero__right__text {
+  display: block;
+}
+
+.card__container {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border: none;
+}
+
+.card__container__small {
+  flex-grow: 1;
+  min-height: 15vh;
+  font-size: 3vh;
+  max-width: 45vw;
+}
