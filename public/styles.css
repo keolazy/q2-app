@@ -144,7 +144,7 @@ html {
 
 .section__text {
   font-size: 2.4vh;
-  flex-basis: 100%;
+  flex-basis: 80%;
 }
 
 .card {
