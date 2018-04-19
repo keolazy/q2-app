@@ -11,23 +11,28 @@ router.post('/', (req, res, next) => {
 		.where('email', givenEmail)
 		.first()
 		.then(userOnFile => {
-			// check for bcrypt match
 			bcrypt
 				.compare(givenPw, userOnFile.hashed_pw)
 				.then(success => {
 					req.session.user = userOnFile.id;
-					res.redirect('/events');
+					if (req.session.returnTo) {
+						req.session.message = {};
+						res.redirect(req.session.returnTo);
+					} else {
+						req.session.message = {};
+						res.redirect('/events');
+					}
 				})
 				.catch(mismatch => {
-					// console.log(mismatch);
-					res.status(400).json('Wrong password');
+					req.session.message = { type: 'warning', text: 'Sorry, that password was incorrect.' };
+					res.redirect('/login');
+					// res.status(400).json('Wrong password');
 				});
 		})
 		.catch(notRegistered => {
-			// console.log(notRegistered);
-			res.status(400).json('That email is not on file');
+			req.session.message = { type: 'warning', text: 'That email is not on file.' };
+			res.redirect('/login');
 		});
-	// res.status(200).json('All clear here');
 });
 
 module.exports = router;

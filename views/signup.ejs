@@ -13,6 +13,9 @@
     <main id="main">
       <section class="section">
         <div class="section__title">Welcome to ReadMe</div>
+        <% if (message) { %>
+          <div class="section__message section__message--<%= message.type%>"><%= message.text %></div>
+        <% } %>
         <form class="section__form" action="/signup" method="post">
           <fieldset class="section__form__fieldset">
             <legend class="section__form__legend">Sign up for a new account</legend>

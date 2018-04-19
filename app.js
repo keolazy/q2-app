@@ -33,6 +33,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+<<<<<<< HEAD
 app.get("/signup", (req, res) => {
   res.render("signup");
 });
@@ -40,6 +41,14 @@ app.get("/signup", (req, res) => {
 app.get("/login", (req, res) => {
   console.log(`ReturnTo is: ${req.session.returnTo}`);
   res.render("login");
+=======
+app.get('/login', (req, res) => {
+	console.log(`ReturnTo is: ${req.session.returnTo}`);
+	console.log(`Message is: ${req.session.message}`);
+	let theMessage = req.session.message;
+	req.session.message = {};
+	res.render('login', { message: theMessage });
+>>>>>>> b909a8e9e23f1fecf8921db9b900d56b677bed78
 });
 
 app.get("/logout", (req, res) => {

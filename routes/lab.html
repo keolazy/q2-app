@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <button onclick='fetchData()'>why hello</button>
+    <p></p>
+    <script>
+    function fetchData() {
+      let apiCall = new XMLHttpRequest();
+
+      apiCall.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          let parsedData = JSON.parse(this.responseText);
+          document.getElementsByTagName("p")[0].innerText = `parsed data: ${parsedData.name} and \
+          request headers: ${this.getAllResponseHeaders()}`;
+          console.log(parsedData)
+        }
+      };
+      apiCall.open("POST", "https://www.eventbriteapi.com/v3/users/me/?token=R35L6HN4MS7M53LVFZN2&", true);
+      apiCall.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      apiCall.send();
+    }
+    </script>
+  </body>
+</html>

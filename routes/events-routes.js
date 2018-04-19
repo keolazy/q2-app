@@ -30,6 +30,8 @@ router.get('/', (req, res) => {
 				res.render('events/home', { users_events: users_events });
 			});
 	} else {
+		req.session.message = { type: 'error', text: 'You must be logged in to view event profiles.' };
+		console.log(`Setting req session message to: ${req.session.message.text}`);
 		res.redirect('/login');
 	}
 });
@@ -51,7 +53,8 @@ router.get('/all', (req, res) => {
 				res.send(error);
 			});
 	} else {
-		res.redirect('/');
+		req.session.message = { type: 'error', text: 'You must be logged in to view event profiles.' };
+		res.redirect('/login');
 	}
 });
 
