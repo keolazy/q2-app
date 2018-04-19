@@ -99,6 +99,26 @@ html {
 	justify-content: center;
 }
 
+.main__message {
+	font-size: 3vh;
+	flex-basis: 100%;
+}
+
+.main__message--warning {
+	background-color: #faffa8;
+	color: #846a3f;
+}
+
+.main__message--confirmation {
+	background-color: #c6f2b5;
+	color: #307216;
+}
+
+.main__message--error {
+	background-color: #fcb7ae;
+	color: #8e1808;
+}
+
 .section {
 	width: 90vw;
 	border-bottom: 1px solid gray;

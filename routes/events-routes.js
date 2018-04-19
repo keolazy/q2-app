@@ -30,6 +30,7 @@ router.get('/', (req, res) => {
 				res.render('events/home', { users_events: users_events });
 			});
 	} else {
+		req.session.message = { type: 'error', text: 'You must be logged in to view event profiles.' };
 		res.redirect('/login');
 	}
 });
