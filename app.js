@@ -10,7 +10,7 @@ const events = require('./routes/events-routes');
 const connections = require('./routes/connections-routes');
 const profiles = require('./routes/profiles-routes');
 const account = require('./routes/accounts-routes');
-const labs = require('./routes/labs-routes');
+const labs = require('./routes/lab-routes');
 
 const auth = require('./controllers/auth');
 const signup = require('./controllers/signup');
