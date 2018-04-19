@@ -105,7 +105,9 @@ router.get('/:id', (req, res) => {
 				.first()
 				.then(profile => {
 					console.log(JSON.stringify(profile));
-					res.render('events/single', { event: event, profile: profile });
+					let theMessage = req.session.message;
+					req.session.message = {};
+					res.render('events/single', { event: event, profile: profile, message: theMessage });
 				});
 		});
 });
