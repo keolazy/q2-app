@@ -14,7 +14,7 @@
       <section class="section">
         <div class="section__title">Edit Account</div>
         <div class="section__subtitle"><%= user.name %></div>
-        <form class="section__form" action="/account/?_method=PUT" method="post" enctype='application/x-www-form-urlencoded'>
+        <form class="section__form" action="/account/edit?_method=PUT" method="post" enctype='application/x-www-form-urlencoded'>
 
           <fieldset class="section__form__fieldset">
             <legend class="section__form__legend">Edit Account</legend>
@@ -36,14 +36,14 @@
             <label class="section__form__label" for="profession">Profession</label>
             <input class="section__form__input" type="text" name="profession" value="<%= user.profession %>">
 
-            <label class="section__form__label" for="emailProfessional">Professional Email</label>
-            <input class="section__form__input" type="text" name="emailProfessional" value="<%= user.email_professional %>">
+            <label class="section__form__label" for="email_professional">Professional Email</label>
+            <input class="section__form__input" type="text" name="email_professional" value="<%= user.email_professional %>">
 
             <label class="section__form__label" for="linkedin">LinkedIn</label>
             <input class="section__form__input" type="text" name="linkedin" value="<%= user.linkedin %>">
 
             <label class="section__form__label" for="facebook">Facebook</label>
-            <input class="section__form__input" type="text" name="Facebook" value="<%= user.facebook %>">
+            <input class="section__form__input" type="text" name="facebook" value="<%= user.facebook %>">
 
             <label class="section__form__label" for="phone">Phone</label>
             <input class="section__form__input" type="text" name="phone" value="<%= user.phone %>">
