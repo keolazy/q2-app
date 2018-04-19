@@ -11,7 +11,7 @@ const connections = require("./routes/connections-routes");
 const profiles = require("./routes/profiles-routes");
 const account = require("./routes/accounts-routes");
 const labs = require("./routes/lab-routes");
-const home = require("./routes/home-routes");
+const home = require("./routes/home");
 
 const auth = require("./controllers/auth");
 const signup = require("./controllers/signup");
