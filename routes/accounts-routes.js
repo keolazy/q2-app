@@ -8,12 +8,13 @@ router.get("/", (req, res) => {
   knex("users")
     .where("id", req.session.user)
     .select("*")
+    .first()
     .then(data => {
-      // res.send("Hopefully no error");
+      console.log(data);
       res.render("account/view", { user: data });
     })
     .catch(error => {
-      res.send("didn not render");
+      res.send("didnt render");
     });
 });
 
