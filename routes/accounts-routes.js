@@ -18,4 +18,21 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/edit", (req, res) => {
+  knex("users")
+    .select("*")
+    .where("id", req.session.user)
+    .first()
+    .then(data => {
+      res.render("account/edit", { user: data });
+    })
+    .catch(error => {
+      res.send(error);
+    });
+});
+
+// router.put("/edit", (req, res) => {
+//   knex("events").where();
+// });
+
 module.exports = router;
