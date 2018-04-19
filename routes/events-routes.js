@@ -54,7 +54,7 @@ router.get('/all', (req, res) => {
 			});
 	} else {
 		req.session.message = { type: 'error', text: 'You must be logged in to view event profiles.' };
-		res.redirect('/');
+		res.redirect('/login');
 	}
 });
 

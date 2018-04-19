@@ -16,17 +16,21 @@ router.post('/', (req, res, next) => {
 				.then(success => {
 					req.session.user = userOnFile.id;
 					if (req.session.returnTo) {
+						req.session.message = {};
 						res.redirect(req.session.returnTo);
 					} else {
 						res.redirect('/events');
 					}
 				})
 				.catch(mismatch => {
-					res.status(400).json('Wrong password');
+					req.session.message = { type: 'warning', text: 'Sorry, that password was incorrect.' };
+					res.redirect('/login');
+					// res.status(400).json('Wrong password');
 				});
 		})
 		.catch(notRegistered => {
-			res.status(400).json('That email is not on file');
+			req.session.message = { type: 'warning', text: 'That email is not on file.' };
+			res.redirect('/login');
 		});
 });
 

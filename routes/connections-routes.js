@@ -8,6 +8,19 @@ router.use((req, res, next) => {
 	next();
 });
 
+router.use('/', (req, res, next) => {
+	console.log(`Session user id is: ${res.locals.user}`);
+	if (res.locals.user) {
+		next();
+	} else {
+		req.session.message = {
+			type: 'error',
+			text: 'You must be logged in to view event connections.'
+		};
+		res.redirect('/login');
+	}
+});
+
 // Returns all connections *for this user*
 router.get('/', (req, res) => {
 	if (res.locals.user) {
@@ -61,7 +74,8 @@ router.get('/:id', (req, res) => {
 				res.send(error);
 			});
 	} else {
-		res.redirect('/');
+		req.session.message = { type: 'error', text: 'You must be logged in to view connections.' };
+		res.redirect('/login');
 	}
 });
 

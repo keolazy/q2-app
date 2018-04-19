@@ -12,6 +12,7 @@ router.use('/', (req, res, next) => {
 	if (res.locals.user) {
 		next();
 	} else {
+		req.session.message = { type: 'error', text: 'You must be logged in to view event profiles.' };
 		res.redirect('/login');
 	}
 });
