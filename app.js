@@ -38,7 +38,12 @@ app.get('/signup', (req, res) => {
 
 app.get('/login', (req, res) => {
 	res.render('login');
-});
+})
+
+// app.get('/signup', (req, res) => {
+// 	res.render('signup');
+// })
+// });
 
 app.get('/logout', (req, res) => {
 	req.session.destroy(err => {
