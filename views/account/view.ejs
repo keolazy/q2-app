@@ -14,10 +14,10 @@
       <section class="section">
 
         <div class="section__title">
-          <a href="/users/">View Single Account</a><%= user.name %>
+          <a href="/users/">View Single Account</a> >> <%= user.name %>
 
         <div class="section__subtitle">
-          <a href="/users/">Events</a> >> <%= user.name %>
+          <a href="/users/"></a> >> <%= user.name %>
 
         </div>
           <div class="card">
@@ -93,9 +93,10 @@
                   </li>
                 <% } %>
             </ul>
-
+            <div class='card__buttons'>
+              <a class='card__button card__button--green' href='/account/edit'>Edit Account</a>
+            </div>
           </div>
-
       </section>
     </main>
     <script src="/shared_scripts.js" charset="utf-8"></script>

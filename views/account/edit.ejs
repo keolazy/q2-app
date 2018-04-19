@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>ReadMe App - Edit Event</title>
+    <title>ReadMe App - Edit Account</title>
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,8 +14,8 @@
       <section class="section">
         <div class="section__title">Edit Account</div>
         <div class="section__subtitle"><%= user.name %></div>
-        <form class="section__form" action="/users/<%=user.id%>/edit?_method=PUT" method="post" enctype='application/x-www-form-urlencoded'>
-          <!--  -->
+        <form class="section__form" action="/account/?_method=PUT" method="post" enctype='application/x-www-form-urlencoded'>
+
           <fieldset class="section__form__fieldset">
             <legend class="section__form__legend">Edit Account</legend>
 
