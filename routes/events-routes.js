@@ -53,7 +53,9 @@ router.get('/all', (req, res) => {
 			.select('*')
 			.then(events => {
 				if (events) {
-					res.render('events/all', { events: events });
+					let theMessage = req.session.message;
+					req.session.message = {};
+					res.render('events/all', { events: events, message: theMessage });
 				} else {
 					res.send('Connection invalid');
 				}
@@ -134,7 +136,11 @@ router.get('/:id/edit', (req, res) => {
 			if (result.host_id == res.locals.user) {
 				res.render('events/edit', { event: result });
 			} else {
-				res.status(400).json('You have to be the host to edit an event.');
+				req.session.message = {
+					type: 'error',
+					text: 'You have to be the honest to edit this event. How did you get here anyway?'
+				};
+				res.redirect(`/${req.params.id}`);
 			}
 		});
 });
