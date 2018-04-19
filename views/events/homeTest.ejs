@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/home.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
   </head>
 
@@ -16,25 +17,27 @@
 
       <section class='section'>
 
-          <div class='row'>
-              <div class='card__home'>
-                 <div class='card'>Full width profile card goes here</div>
+          <div class='card card__hero'>
+              <img class='card__hero__img' src='https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F42894056%2F75621018457%2F1%2Foriginal.jpg?w=800&auto=compress&rect=0%2C0%2C2160%2C1080&s=b099332e8654fdfed399f4b4b2cefa25' alt='Disrupt Austin Banner Pic'>
+              <div class="card__hero__right">
+                <div class="card__hero__right__text">User Name</div>
+                <div class="card__hero__right__text">More of some text</div>
+                <div class="card__hero__right__text">Even more text</div>
+                <div class="card__hero__right__text">Fourth line of text</div>
               </div>
-            <div class='row'>
-                <div class='card card__container'>
-                  <div class='card card__small'>
-                    <i class="fas fa-hashtag"></i><%=`${users_events.length}  `%>  RSVP'd Events.
-                  </div>
-                  <div class='card card__small'>
-                    <i class="fas fa-hashtag"></i>  Hosted Events.
-                  </div>
-                  <div class='card card__small'>
-                    <i class="fas fa-hashtag"></i>  Connections.
-                  </div>
-              </div>
-        </div>
           </div>
 
+              <div class='card card__container'>
+                <div class='card card__container__small'>
+                  <i class="fas fa-hashtag "></i><%=`${users_events.length}`%>  <br>RSVP'd Events.
+                </div>
+                <div class='card card__container__small'>
+                  <i class="fas fa-birthday-cake"></i> <br>Hosted Events.
+                </div>
+                <div class='card card__container__small'>
+                  <i class="fas fa-users"></i>  <br>Connections.
+                </div>
+              </div>
       </section>
 
       <section class="section">
