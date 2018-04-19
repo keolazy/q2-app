@@ -35,70 +35,53 @@ const methodOverride = require("method-override");
 // });
 
 router.use((req, res, next) => {
-	req.session.returnToPrev = req.session.returnTo;
-	req.session.returnTo = req.originalUrl;
-	next();
+  req.session.returnToPrev = req.session.returnTo;
+  req.session.returnTo = req.originalUrl;
+  next();
 });
 
-router.use('/', (req, res, next) => {
-	console.log(`Session user id is: ${res.locals.user}`);
-	if (res.locals.user) {
-		next();
-	} else {
-		req.session.message = { type: 'error', text: 'You must be logged in to view event profiles.' };
-		res.redirect('/login');
-	}
+router.use("/", (req, res, next) => {
+  console.log(`Session user id is: ${res.locals.user}`);
+  if (res.locals.user) {
+    next();
+  } else {
+    req.session.message = {
+      type: "error",
+      text: "You must be logged in to view event profiles."
+    };
+    res.redirect("/login");
+  }
 });
 
-router.get('/', (req, res, next) => {
-  let profileHero = knex('users_events')
-    .where('event_id', req.session.user)
-    .innerJoin('users', 'users_events.user_id', 'users.id')
+router.get("/", (req, res, next) => {
+  let profileHero = knex("users_events")
+    .where("event_id", req.session.user)
+    .innerJoin("users", "users_events.user_id", "users.id")
     .select({
-      userID: 'users.id',
-			userFirst: 'users.first',
-			userLast: 'users.last',
-			profileID: 'users_events.id',
-			profileQuestions: 'users_events.questions',
-			profileTopics: 'users_events.topics',
-			profileJob: 'users_events.job_status',
-			profileNoise: 'users_events.noise_level',
-			profileWhereToFind: 'users_events.where_to_find',
-			profileAskMe: 'users_events.ask_me',
-			profilePersonality: 'users_events.personality'
-    })
+      userID: "users.id",
+      userFirst: "users.first",
+      userLast: "users.last",
+      profileID: "users_events.id",
+      profileQuestions: "users_events.questions",
+      profileTopics: "users_events.topics",
+      profileJob: "users_events.job_status",
+      profileNoise: "users_events.noise_level",
+      profileWhereToFind: "users_events.where_to_find",
+      profileAskMe: "users_events.ask_me",
+      profilePersonality: "users_events.personality"
+    });
 
-    let rsvpCount = knex('users_events')
-      .where('host_id', res.locals.user)
-      .count('users_events');
+  let rsvpCount = knex("users_events")
+    .where("host_id", res.locals.user)
+    .count("users_events");
 
-    let hostingCount = knex('events')
-      .where('host_id', res.locals.user)
-      .count('events');
+  let hostingCount = knex("events")
+    .where("host_id", res.locals.user)
+    .count("events");
 
-    let connectionCount = knex('connections')
-      .where('host_id', res.locals.user);
-      .count()
-
-
-
-
-
-
-
-
-
-})
-
-
-
-
-
-
-
-
-
-
-
+  let connectionCount = knex("connections")
+    .where("mutual", true)
+    .count();
+});
 
 module.exports = router;
