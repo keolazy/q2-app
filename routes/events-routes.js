@@ -53,7 +53,9 @@ router.get('/all', (req, res) => {
 			.select('*')
 			.then(events => {
 				if (events) {
-					res.render('events/all', { events: events });
+					let theMessage = req.session.message;
+					req.session.message = {};
+					res.render('events/all', { events: events, message: theMessage });
 				} else {
 					res.send('Connection invalid');
 				}
