@@ -31,6 +31,7 @@ router.get('/', (req, res) => {
 			});
 	} else {
 		req.session.message = { type: 'error', text: 'You must be logged in to view event profiles.' };
+		console.log(`Setting req session message to: ${req.session.message.text}`);
 		res.redirect('/login');
 	}
 });
@@ -52,6 +53,7 @@ router.get('/all', (req, res) => {
 				res.send(error);
 			});
 	} else {
+		req.session.message = { type: 'error', text: 'You must be logged in to view event profiles.' };
 		res.redirect('/');
 	}
 });

@@ -38,7 +38,8 @@ app.get('/signup', (req, res) => {
 
 app.get('/login', (req, res) => {
 	console.log(`ReturnTo is: ${req.session.returnTo}`);
-	res.render('login');
+	console.log(`Message is: ${req.session.message}`);
+	res.render('login', { message: req.session.message });
 });
 
 app.get('/logout', (req, res) => {
