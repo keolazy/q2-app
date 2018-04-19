@@ -13,6 +13,9 @@
     <main id="main">
       <section class="section">
         <div class="section__title"><a href="/events/">Events</a> >> <a href="/events/<%= event.id%>"><%= event.name %></a> >> Attendees</div>
+        <% if (message) { %>
+          <div class="section__message section__message--<%= message.type%>"><%= message.text %></div>
+        <% } %>
         <div class="section__subtitle">Here's who's attending:</div>
         <% profiles.forEach(profile => { %>
           <% let connectionId = connections.findIndex(conn => conn.user_id_friend == profile.userID) %>

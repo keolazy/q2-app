@@ -3,6 +3,7 @@ const router = express.Router({ mergeParams: true });
 const knex = require('../db/knex');
 
 router.use((req, res, next) => {
+	req.session.returnToPrev = req.session.returnTo;
 	req.session.returnTo = req.originalUrl;
 	next();
 });
@@ -12,6 +13,7 @@ router.use('/', (req, res, next) => {
 	if (res.locals.user) {
 		next();
 	} else {
+		req.session.message = { type: 'error', text: 'You must be logged in to view event profiles.' };
 		res.redirect('/login');
 	}
 });
@@ -50,7 +52,11 @@ router.get('/', (req, res, next) => {
 			let eventData = data[1];
 			let connectionData = data[2];
 
+			let theMessage = req.session.message;
+			req.session.message = {};
+
 			res.render('profiles/all', {
+				message: theMessage,
 				userID: res.locals.user,
 				event: eventData,
 				profiles: profileData,
@@ -74,8 +80,16 @@ router.get('/rsvp', (req, res) => {
 	checkIfExisting.then(profile => {
 		// If RSVP already exists, just edit it
 		if (profile != null) {
+			req.session.message = {
+				type: 'confirmation',
+				text: 'Editing your existing profile.'
+			};
 			res.redirect(`/events/${req.params.id}/profiles/${profile.id}/edit`);
 		} else {
+			req.session.message = {
+				type: 'warning',
+				text: `Okay you're signed up! Please fill in some fields for your new profile.`
+			};
 			res.redirect(`/events/${req.params.id}/profiles/new`);
 		}
 	});
@@ -105,6 +119,10 @@ router.get('/new', (req, res) => {
 					console.log(`Profile that got created is: ${newCreatedProfile}`);
 					// Lookup id for new Profile and send user to edit it:
 					let newProfileID = newCreatedProfile.id;
+					req.session.message = {
+						type: 'warning',
+						text: `Okay you're signed up! Please fill in some fields for your new profile.`
+					};
 					res.redirect(`/events/${newEventID}/profiles/${newProfileID}/edit`);
 				});
 		});
@@ -127,7 +145,14 @@ router.delete('/:profileID', (req, res) => {
 			.first()
 			.del()
 			.then(result => {
-				res.status(200).json('Profile deleted!');
+				req.session.message = {
+					type: 'warning',
+					text: 'Deleted your profile and removed your RSVP.'
+				};
+				console.log(`ReturnToPrev is set to: ${req.session.returnToPrev}`);
+				console.log(`ReturnTo is set to: ${req.session.returnTo}`);
+				res.redirect(`/events/${req.params.id}`);
+				// res.status(200).json('Profile deleted!');
 			});
 	});
 });
@@ -162,7 +187,10 @@ router.get('/:profileID', (req, res, next) => {
 				.where('user_id_owner', res.locals.user)
 				.andWhere('user_id_friend', profileData.userID)
 				.then(connectionData => {
+					let theMessage = req.session.message;
+					req.session.message = {};
 					res.render('profiles/single', {
+						message: theMessage,
 						userID: res.locals.user,
 						profile: profileData,
 						event: eventData,
@@ -171,8 +199,13 @@ router.get('/:profileID', (req, res, next) => {
 				});
 		})
 		.catch(err => {
-			console.log(err);
-			res.status(500).send(err);
+			req.session.message = {
+				type: 'error',
+				text: 'Hmm, we hit a server error on that one for some reason. Sorry.'
+			};
+			res.redirect(req.session.returnTo);
+			// console.log(err);
+			// res.status(500).send(err);
 		});
 });
 
@@ -202,7 +235,11 @@ router.get('/:profileID/edit', (req, res, next) => {
 			let profileData = data[0];
 			let eventData = data[1];
 
+			let theMessage = req.session.message;
+			req.session.message = {};
+
 			res.render('profiles/edit', {
+				message: theMessage,
 				userID: res.locals.user,
 				profile: profileData,
 				event: eventData
@@ -234,10 +271,18 @@ router.put('/:profileID/edit', (req, res, next) => {
 					personality: req.body.personality
 				})
 				.then(result => {
-					res.redirect(`/events/${req.body.event_id}/profiles/${req.params.profileID}`);
+					req.session.message = {
+						type: 'confirmation',
+						text: `Updated profile details.`
+					};
+					res.redirect(`/events/${req.body.event_id}`);
 				});
 		} else {
-			res.status(400).json(`You can't edit a profile that isn't yours`);
+			req.session.message = {
+				type: 'warning',
+				text: `You can't edit a profile that isn't yours! How did you get there anyway?`
+			};
+			res.redirect(req.session.returnToPrev);
 		}
 	});
 });

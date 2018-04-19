@@ -13,7 +13,10 @@
     <% include ../partials/nav %>
     <main id="main">
       <section class="section">
-        <div class="section__title"><h1>All Events:</h1></div>
+        <div class="section__title">All Events:</div>
+        <% if (message) { %>
+          <div class="section__message section__message--<%= message.type%>"><%= message.text %></div>
+        <% } %>
 
           <% events.forEach(event => { %>
             <div class='card'>

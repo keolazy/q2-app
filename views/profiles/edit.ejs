@@ -13,6 +13,9 @@
     <main id="main">
       <section class="section">
         <div class="section__title"><a href="/events/<%= event[0].id%>"><%= event[0].name %></a> >> <a href="/events/<%= event[0].id%>/profiles">Profiles</a> >> Your Profile</div>
+        <% if (message) { %>
+          <div class="section__message section__message--<%= message.type%>"><%= message.text %></div>
+        <% } %>
         <form class="section__form" action="/events/<%= event[0].id %>/profiles/<%=profile.profileID%>/edit?_method=PUT" method="post" enctype='application/x-www-form-urlencoded'>
           <!--  -->
           <fieldset class="section__form__fieldset">

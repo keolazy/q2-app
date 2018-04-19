@@ -11,6 +11,7 @@ const connections = require('./routes/connections-routes');
 const profiles = require('./routes/profiles-routes');
 const account = require('./routes/accounts-routes');
 const labs = require('./routes/lab-routes');
+const home = require('./routes/home');
 
 const auth = require('./controllers/auth');
 const signup = require('./controllers/signup');
@@ -32,14 +33,12 @@ app.use(function(req, res, next) {
 	next();
 });
 
-app.get('/signup', (req, res) => {
-	res.render('signup');
-});
-
 app.get('/login', (req, res) => {
 	console.log(`ReturnTo is: ${req.session.returnTo}`);
 	console.log(`Message is: ${req.session.message}`);
-	res.render('login', { message: req.session.message });
+	let theMessage = req.session.message;
+	req.session.message = {};
+	res.render('login', { message: theMessage });
 });
 
 app.get('/logout', (req, res) => {
@@ -69,6 +68,7 @@ app.use('/connections', connections);
 app.use('/profiles', profiles);
 app.use('/account', account);
 app.use('/labs', labs);
+app.use('/home', home);
 
 app.set('view engine', 'ejs');
 

@@ -9,6 +9,16 @@ router.use((req, res, next) => {
 	next();
 });
 
+router.use('/', (req, res, next) => {
+	console.log(`Session user id is: ${res.locals.user}`);
+	if (res.locals.user) {
+		next();
+	} else {
+		req.session.message = { type: 'error', text: 'You must be logged in to view events.' };
+		res.redirect('/login');
+	}
+});
+
 // Get all user's events
 router.get('/', (req, res) => {
 	if (req.session.user) {
@@ -54,7 +64,7 @@ router.get('/all', (req, res) => {
 			});
 	} else {
 		req.session.message = { type: 'error', text: 'You must be logged in to view event profiles.' };
-		res.redirect('/');
+		res.redirect('/login');
 	}
 });
 
@@ -105,7 +115,9 @@ router.get('/:id', (req, res) => {
 				.first()
 				.then(profile => {
 					console.log(JSON.stringify(profile));
-					res.render('events/single', { event: event, profile: profile });
+					let theMessage = req.session.message;
+					req.session.message = {};
+					res.render('events/single', { event: event, profile: profile, message: theMessage });
 				});
 		});
 });
@@ -140,6 +152,10 @@ router.put('/:id/edit', (req, res) => {
 					.update(req.body)
 					.then(result => {
 						console.log(`Event updated.`);
+						req.session.message = {
+							type: 'confirmation',
+							text: 'Event details updated.'
+						};
 						res.redirect(`/events/${req.params.id}`);
 					});
 			} else {

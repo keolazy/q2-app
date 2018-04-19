@@ -3,9 +3,22 @@ const router = express.Router();
 const knex = require('../db/knex');
 const bodyParser = require('body-parser');
 
-router.use((req, res, next) => {
-	req.session.returnTo = req.originalUrl;
-	next();
+// router.use((req, res, next) => {
+// 	req.session.returnTo = req.originalUrl;
+// 	next();
+// });
+
+router.use('/', (req, res, next) => {
+	console.log(`Session user id is: ${res.locals.user}`);
+	if (res.locals.user) {
+		next();
+	} else {
+		req.session.message = {
+			type: 'error',
+			text: 'You must be logged in to view event connections.'
+		};
+		res.redirect('/login');
+	}
 });
 
 // Returns all connections *for this user*
@@ -28,7 +41,10 @@ router.get('/', (req, res) => {
 				phone: 'users.phone'
 			})
 			.then(connections => {
+				theMessage = req.session.message;
+				req.session.message = {};
 				res.render('connections', {
+					message: theMessage,
 					userID: res.locals.user,
 					connections: connections
 				});
@@ -61,7 +77,8 @@ router.get('/:id', (req, res) => {
 				res.send(error);
 			});
 	} else {
-		res.redirect('/');
+		req.session.message = { type: 'error', text: 'You must be logged in to view connections.' };
+		res.redirect('/login');
 	}
 });
 
@@ -147,7 +164,11 @@ router.post('/:id/:friend_id', (req, res) => {
 				})
 				.update({ mutual: true })
 				.then(result => {
-					res.status(200).json('You are already mutually connected to this person.');
+					req.session.message = {
+						type: 'warning',
+						text: 'You are already mutually connected with this person.'
+					};
+					res.redirect(req.session.returnTo);
 				});
 		} else if (reciprocalExists) {
 			knex('connections')
@@ -164,11 +185,21 @@ router.post('/:id/:friend_id', (req, res) => {
 						})
 						.update({ mutual: true })
 						.then(result => {
-							res.status(200).json('Created a new mutual connection');
+							// res.status(200).json('Created a new mutual connection');
+							req.session.message = {
+								type: 'confirmation',
+								text:
+									"Friendship established! You can now see this person's full info on the Connections page."
+							};
+							res.redirect(req.session.returnTo);
 						});
 				});
 		} else if (recordExists) {
-			res.status(400).json('You already requested to connect with this person.');
+			req.session.message = {
+				type: 'warning',
+				text: 'You already requested to connect with this person.'
+			};
+			res.redirect(req.session.returnTo);
 		} else {
 			knex('connections')
 				.insert({
@@ -177,7 +208,12 @@ router.post('/:id/:friend_id', (req, res) => {
 					mutual: false
 				})
 				.then(result => {
-					res.status(200).json('New connection created.');
+					req.session.message = {
+						type: 'confirmation',
+						text:
+							"Created new one-way connection! If this person reciprocates, you'll see their full info on the Connections page."
+					};
+					res.redirect(req.session.returnTo);
 				});
 		}
 	});
@@ -243,7 +279,11 @@ router.delete('/:owner_id/:friend_id', (req, res) => {
 				.del()
 				.then(deleteResult => {
 					console.log(`Result of delete: ${deleteResult}`);
-					res.status(200).json('Record deleted for you');
+					req.session.message = {
+						type: 'warning',
+						text: 'Removed your connection with this person.'
+					};
+					res.redirect('/connections');
 				});
 		});
 });
