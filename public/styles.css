@@ -99,6 +99,28 @@ html {
 	justify-content: center;
 }
 
+.section__message {
+	margin: 2vh auto;
+	text-align: center;
+	font-size: 2.5vh;
+	flex-basis: 70%;
+}
+
+.section__message--warning {
+	background-color: #faffa8;
+	color: #846a3f;
+}
+
+.section__message--confirmation {
+	background-color: #c6f2b5;
+	color: #307216;
+}
+
+.section__message--error {
+	background-color: #fcb7ae;
+	color: #ff4128;
+}
+
 .section {
 	width: 90vw;
 	border-bottom: 1px solid gray;
@@ -307,6 +329,13 @@ html {
 		display: flex;
 		flex-flow: row wrap;
 		justify-content: center;
+	}
+
+	.section__message {
+		box-sizing: border-box;
+		max-width: 50vw;
+		padding: 0.5vh 1vw;
+		margin: 2vh 20vw;
 	}
 
 	.section__title,
