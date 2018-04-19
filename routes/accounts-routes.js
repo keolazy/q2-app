@@ -45,7 +45,7 @@ router.put("/edit", (req, res) => {
           .update(req.body)
           .then(result => {
             console.log(`Account Succesfully Updated`);
-            res.redirect(`/account/view`);
+            res.redirect(`/account`);
           });
       } else {
         res.status(400).json("you have to be the host to edit this account.");

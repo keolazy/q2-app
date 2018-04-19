@@ -37,6 +37,7 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
+	console.log(`ReturnTo is: ${req.session.returnTo}`);
 	res.render('login');
 })
 
@@ -61,7 +62,7 @@ app.get('/', (req, res, next) => {
 		res.redirect('/protected-generic.html');
 	} else {
 		console.log('No session found on this request.');
-		res.render('login');
+		res.redirect('/login');
 	}
 });
 

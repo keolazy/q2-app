@@ -3,6 +3,11 @@ const router = express.Router();
 const knex = require('../db/knex');
 const bodyParser = require('body-parser');
 
+router.use((req, res, next) => {
+	req.session.returnTo = req.originalUrl;
+	next();
+});
+
 // Returns all connections *for this user*
 router.get('/', (req, res) => {
 	if (res.locals.user) {
