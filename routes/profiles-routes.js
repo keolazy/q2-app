@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 const knex = require('../db/knex');
 
+router.use((req, res, next) => {
+	req.session.returnTo = req.originalUrl;
+	next();
+});
+
 router.use('/', (req, res, next) => {
 	console.log(`Session user id is: ${res.locals.user}`);
 	if (res.locals.user) {
