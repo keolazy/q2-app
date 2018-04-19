@@ -19,6 +19,7 @@ router.post('/', (req, res, next) => {
 						req.session.message = {};
 						res.redirect(req.session.returnTo);
 					} else {
+						req.session.message = {};
 						res.redirect('/events');
 					}
 				})

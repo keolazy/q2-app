@@ -4,7 +4,8 @@ const knex = require('../db/knex');
 const session = require('express-session');
 
 router.get('/', (req, res) => {
-	res.render('signup');
+	console.log(`About to render signup`);
+	res.render('signup', { message: req.session.message });
 });
 
 router.post('/', (req, res, next) => {
@@ -15,23 +16,35 @@ router.post('/', (req, res, next) => {
 		.where('email', givenEmail)
 		.then(result => {
 			if (result.length) {
-				res.status(400).send('This email already exists');
+				req.session.message = { type: 'warning', text: 'Oh, that email already exists.' };
+				res.redirect('/signup');
 			} else {
 				bcrypt.hash(givenPw, 10).then(hash => {
 					knex('users')
 						.insert({ email: givenEmail, hashed_pw: hash })
 						.then(success => {
-							// res.status(200).send('Ok we created your account!');
+							req.session.message = {
+								type: 'confirmation',
+								text: 'Account created! Please sign in.'
+							};
 							res.redirect('/login');
 						})
 						.catch(err => {
-							res.status(500).send(`We hit an error saving the user`);
+							req.session.message = {
+								type: 'error',
+								text: 'We hit an error creating your account.'
+							};
+							res.redirect('/signup');
 						});
 				});
 			}
 		})
 		.catch(err => {
-			res.status(500).send('We hit an error in the lookup');
+			req.session.message = {
+				type: 'error',
+				text: 'We hit some kind of server error. Perhaps try again?'
+			};
+			res.redirect('/signup');
 		});
 });
 

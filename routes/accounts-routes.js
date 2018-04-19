@@ -29,10 +29,13 @@ router.get('/', (req, res) => {
 		.first()
 		.then(data => {
 			console.log(data);
-			res.render('account/view', { user: data, message: req.session.message });
+			let theMessage = req.session.message;
+			req.session.message = {};
+			res.render('account/view', { user: data, message: theMessage });
 		})
 		.catch(error => {
-			res.send('didnt render');
+			req.session.message = { type: 'error', text: 'Something went wrong just now, sorry.' };
+			res.redirect('/account');
 		});
 });
 
@@ -46,7 +49,8 @@ router.get('/edit', (req, res) => {
 			res.render('account/edit', { user: data, message: req.session.message });
 		})
 		.catch(error => {
-			res.send(error);
+			req.session.message = { type: 'error', text: 'Something went wrong just now, sorry.' };
+			res.redirect('/account');
 		});
 });
 
@@ -62,11 +66,18 @@ router.put('/edit', (req, res) => {
 					.where({ id: req.session.user })
 					.update(req.body)
 					.then(result => {
-						console.log(`Account Succesfully Updated`);
+						req.session.message = {
+							type: 'confirmation',
+							text: `Account details updated!`
+						};
 						res.redirect(`/account`);
 					});
 			} else {
-				res.status(400).json('you have to be the host to edit this account.');
+				req.session.message = {
+					type: 'error',
+					text: `You have to be the host to edit this account. Also, how did you get here in the first place?`
+				};
+				res.redirect('/account/edit');
 			}
 		});
 });
