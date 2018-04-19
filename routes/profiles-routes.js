@@ -121,7 +121,7 @@ router.get('/new', (req, res) => {
 					let newProfileID = newCreatedProfile.id;
 					req.session.message = {
 						type: 'warning',
-						text: 'Editing a brand new profile.'
+						text: `Okay you're signed up! Please fill in some fields for your new profile.`
 					};
 					res.redirect(`/events/${newEventID}/profiles/${newProfileID}/edit`);
 				});
@@ -275,7 +275,7 @@ router.put('/:profileID/edit', (req, res, next) => {
 						type: 'confirmation',
 						text: `Updated profile details.`
 					};
-					res.redirect(`/events/${req.body.event_id}/profiles/${req.params.profileID}`);
+					res.redirect(`/events/${req.body.event_id}`);
 				});
 		} else {
 			req.session.message = {

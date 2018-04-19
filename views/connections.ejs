@@ -13,6 +13,9 @@
     <main id="main">
       <section class="section">
         <div class="section__title">Your Mutual Connections</a></div>
+        <% if (message) { %>
+          <div class="section__message section__message--<%= message.type%>"><%= message.text %></div>
+        <% } %>
         <% connections.forEach(connection => { %>
           <div class="card">
             <div class="card__title"><%= `${connection.first} ${connection.last}` %></div>

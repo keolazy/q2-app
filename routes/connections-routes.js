@@ -41,7 +41,10 @@ router.get('/', (req, res) => {
 				phone: 'users.phone'
 			})
 			.then(connections => {
+				theMessage = req.session.message;
+				req.session.message = {};
 				res.render('connections', {
+					message: theMessage,
 					userID: res.locals.user,
 					connections: connections
 				});
@@ -280,7 +283,7 @@ router.delete('/:owner_id/:friend_id', (req, res) => {
 						type: 'warning',
 						text: 'Removed your connection with this person.'
 					};
-					res.redirect(req.session.returnTo);
+					res.redirect('/connections');
 				});
 		});
 });
