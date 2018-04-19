@@ -88,7 +88,7 @@ router.get('/rsvp', (req, res) => {
 		} else {
 			req.session.message = {
 				type: 'warning',
-				text: 'Editing a brand new profile.'
+				text: `Okay you're signed up! Please fill in some fields for your new profile.`
 			};
 			res.redirect(`/events/${req.params.id}/profiles/new`);
 		}
