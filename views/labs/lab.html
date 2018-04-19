@@ -10,14 +10,14 @@ input{margin:1%;width:700px;}
   </head>
   <body>
     <pre>
-https://www.eventbriteapi.com/v3/users/me/?token=R35L6HN4MS7M53LVFZN2
+https://www.eventbriteapi.com/v3/users/me/?token=BFJKNNGLDIDQ52ADJ5A4
 https://www.eventbriteapi.com/v3/users/me/owned_events/?token=R35L6HN4MS7M53LVFZN2
 https://www.eventbriteapi.com/v3/events/search/?
     </pre>
     <table>
       <tr><td>readme key<td>RU2TZ4P4WZG54YRV4P
         <tr><td>client secret<td>MQGSGXOVIN4GA5VBCUMOGPTDJELX252PGFCDIGWSA3A35CXRDC
-          <tr><td>personal token<td>R35L6HN4MS7M53LVFZN2
+          <tr><td>personal token<td>BFJKNNGLDIDQ52ADJ5A4
             <tr><td>anonymous token<td>E5XLYLMHA6QZJOIATFAT
     </table>
       <input type='text' onchange='fetchData()'>
@@ -26,35 +26,20 @@ https://www.eventbriteapi.com/v3/events/search/?
         let box = document.getElementsByTagName('input')[0];
         function fetchData() {
           let apiCall = new XMLHttpRequest();
-
           apiCall.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
               let parsedData = JSON.parse(this.responseText);
-                // document.getElementsByTagName("p")[0].innerText = `parsed data: ${parsedData}`;
+                document.getElementsByTagName("p")[0].innerText = `parsnips: ${parsedData}`;
                 console.log(parsedData)
             }
           };
-    apiCall.open("POST", `${box.value}`, true);
+    apiCall.open("GET", `${box.value}`, true);
           apiCall.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
           // apiCall.setRequestHeader("Access-Control-Allow-Origin", "*")
-          apiCall.setRequestHeader("Authorization", "Bearer R35L6HN4MS7M53LVFZN2")
+          apiCall.setRequestHeader("Authorization", "Bearer BFJKNNGLDIDQ52ADJ5A4")
           apiCall.send();
         }
-// jQuery
-//     let settings = {
-//     "async": true,
-//     "crossDomain": true,
-//     "url": "https://www.eventbriteapi.com/v3/events/45322642243/?token=R35L6HN4MS7M53LVFZN2",
-//     "method": "POST",
-//     "headers": {"Content-Type": "application/x-www-form-urlencoded"}
-//   }
-// function fetchData() {
-//   $.ajax(settings).done(function (data) {
-//     console.log(data);
-//     let content = data.responseText;
-//     $("p").append(content);
-//   });
-// }
+
     </script>
   </body>
 </html>
