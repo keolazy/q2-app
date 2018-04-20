@@ -28,7 +28,8 @@ exports.seed = function(knex, Promise) {
 			linkedin: 'JordanP1980',
 			facebook: 'JordanP',
 			hashed_pw: bcrypt.hashSync('jordan', 10),
-			phone: '512-777-6677'
+			phone: '512-777-6677',
+			photo: 'https://image-ticketfly.imgix.net/00/02/83/00/43-og.jpg'
 		},
 		{
 			first: 'Barack',
@@ -42,7 +43,8 @@ exports.seed = function(knex, Promise) {
 			linkedin: 'BarackO000',
 			facebook: 'Barack0bama',
 			hashed_pw: bcrypt.hashSync('barack', 10),
-			phone: '469-398-1036'
+			phone: '469-398-1036',
+			photo: 'https://i.pinimg.com/originals/b3/97/8e/b3978e7ff0e857c06cb8184a98b17d96.jpg'
 		},
 		{
 			first: 'Henry',
