@@ -50,6 +50,8 @@
 
     <section class="section">
       <div class='section__title'>Technology</div>
+      <div class="section__subtitle"><a target="_blank" href="https://github.com/ian-schu/q2-app">View this project on Github</a></div>
+      <p class="section__text"></p>
       <div class='section__subtitle'>The Stack</div>
         <p class="section__text">
           Main ingredients for this project are:
@@ -59,6 +61,7 @@
             <li><strong>Postgres + Knex</strong> for persistent storage and CRUD</li>
             <li><strong>Express-session and bCrypt</strong> for auth</li>
             <li><strong>EJS</strong> for server-side rendering</li>
+            <li><strong>Mocha, Chai, and Supertest</strong> for a bit of TDD</li>
           </ul>
         </p>
         <div class='section__subtitle'>Decisions and Challenges</div>
@@ -70,10 +73,14 @@
             <li>... organizing and sequencing many pieces of middleware to cooperate coherently,</li>
             <li>... using semi-persistent storage (e.g. sessions, cookies) to pass around short-term data such as redirect paths and confirmation / error messages</li>
           </ul>
-          Along the way we also learned plenty about merge conflicts.
+        </p>
+          <p class="section__text">
+
+          ... And along the way we also learned plenty about merge conflicts.
         </p>
       </section>
 
+      <% include ./partials/footer %>
     </main>
     <script src="/shared_scripts.js" charset="utf-8"></script>
 
