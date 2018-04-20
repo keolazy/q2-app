@@ -20,7 +20,7 @@ router.post('/', (req, res, next) => {
 						res.redirect(req.session.returnTo);
 					} else {
 						req.session.message = {};
-						res.redirect('/events');
+						res.redirect('/home');
 					}
 				})
 				.catch(mismatch => {

@@ -20,7 +20,7 @@ router.use('/', (req, res, next) => {
 });
 
 // Get all user's events
-router.get('/', (req, res) => {
+router.get('/my', (req, res) => {
 	if (req.session.user) {
 		knex('users_events')
 			.where('user_id', req.session.user)
@@ -47,7 +47,7 @@ router.get('/', (req, res) => {
 });
 
 // Return all events
-router.get('/all', (req, res) => {
+router.get('/', (req, res) => {
 	if (req.session.user) {
 		knex('events')
 			.select('*')
