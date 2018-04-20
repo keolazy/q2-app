@@ -142,8 +142,8 @@ html {
 
 .section {
 	width: 90vw;
-	border-bottom: 1px solid gray;
-	margin-bottom: 2vh;
+	border-bottom: 1px solid #000;
+	padding-bottom: 1vh;
 }
 
 .section__title {
