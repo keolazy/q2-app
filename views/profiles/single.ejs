@@ -12,7 +12,7 @@
     <% include ../partials/nav %>
     <main id="main">
       <section class="section">
-        <div class="section__title"><a href="/events/<%= event[0].id%>"><%= event[0].name %></a> >> <a href="/events/<%= event[0].id%>/profiles">Profiles</a> >> <%= `${profile.userFirst} ${profile.userLast[0]}.` %></div>
+        <div class="section__subtitle"><a href="/events/<%= event[0].id%>"><%= event[0].name %></a> >> <a href="/events/<%= event[0].id%>/profiles">Profiles</a> >> <%= `${profile.userFirst} ${profile.userLast[0]}.` %></div>
         <% if (message) { %>
           <div class="section__message section__message--<%= message.type%>"><%= message.text %></div>
         <% } %>
