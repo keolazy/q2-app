@@ -78,7 +78,7 @@ router.get('/', (req, res, next) => {
 		.count('events');
 
 	let connectionCount = knex('connections')
-		.where('mutual', true)
+		.where({ user_id_owner: res.locals.user, mutual: true })
 		.count();
 
 	Promise.all([userQuery, rsvpCount, hostingCount, connectionCount, eventsQuery])
