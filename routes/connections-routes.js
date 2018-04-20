@@ -38,7 +38,8 @@ router.get('/', (req, res) => {
 				profEmail: 'users.email_professional',
 				linkedIn: 'users.linkedin',
 				facebook: 'users.facebook',
-				phone: 'users.phone'
+				phone: 'users.phone',
+				photo: 'users.photo'
 			})
 			.then(connections => {
 				theMessage = req.session.message;
@@ -65,11 +66,9 @@ router.get('/:id', (req, res) => {
 			.then(connection => {
 				console.log('Found connection:', connection);
 				if (connection) {
-					// Connection exists!
 					res.send(connection);
 				} else {
-					// Connection doesn't belong to this user.
-					res.send("That's not your connection biotch!");
+					res.send('No connection found under this ID');
 				}
 			})
 			.catch(error => {
