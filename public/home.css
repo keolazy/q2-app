@@ -66,3 +66,24 @@
 .card__container__small__prop {
 	font-size: 5vh;
 }
+
+@media only screen and (min-width: 700px) {
+	.section__dashboard {
+		flex-flow: column nowrap;
+	}
+
+	.card__hero,
+	.card__container {
+		max-width: none;
+	}
+
+	.card__hero__img {
+		margin: 0 auto;
+	}
+
+	.card__container__small {
+		margin: 2vmin 2vmin;
+		font-size: 4vh;
+		text-align: center;
+	}
+}
