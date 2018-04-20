@@ -167,6 +167,7 @@ router.get('/:profileID', (req, res, next) => {
 			userID: 'users.id',
 			userFirst: 'users.first',
 			userLast: 'users.last',
+			userPhoto: 'users.photo',
 			profileID: 'users_events.id',
 			profileQuestions: 'users_events.questions',
 			profileTopics: 'users_events.topics',
