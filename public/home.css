@@ -1,75 +1,80 @@
 .section {
-  width: 90vw;
-  border-bottom: 1px solid gray;
-  margin-bottom: 2vh;
+	width: 90vw;
+	border-bottom: 1px solid gray;
+	margin-bottom: 2vh;
 }
 
 .section__dashboard {
-  height: 90vh;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-content: center;
+	height: 90vh;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-content: center;
 }
 
 .card__hero {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  border: none;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	border: none;
 }
 
 .card__hero__img {
-  height: 35vh;
-  width: 35vh;
-  border-radius: 50%;
-  border: 5px solid #fff;
-  box-shadow: 0px 0px 5px #000;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  flex-shrink: 0;
+	height: 35vh;
+	width: 35vh;
+	border-radius: 50%;
+	border: 5px solid #fff;
+	box-shadow: 0px 0px 5px #000;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	flex-shrink: 0;
 }
 
 .card__hero__right {
-  flex-grow: 1;
-  font-size: 4.5vh;
-  max-height: 90%;
-  text-align: center;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
+	flex-grow: 1;
+	font-size: 4.5vh;
+	max-height: 90%;
+	text-align: center;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
 }
 
 .card__hero__right__text {
-  display: block;
+	display: block;
 }
 
 .card__container {
-  flex-direction: row;
-  flex-wrap: nowrap;
-  border: none;
-  max-height: 33vh;
-  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	border: none;
+	max-height: 33vh;
+	display: flex;
 }
 
 .card__container__small {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-  min-height: 25vh;
-  font-size: 3vh;
+	display: flex;
+	flex-flow: column wrap;
+	align-items: center;
+	justify-content: center;
+	flex-grow: 1;
+	min-height: 25vh;
+	font-size: 3vh;
+}
+
+.card__container__small:hover {
+	background: #feffcc;
+	cursor: pointer;
 }
 
 .card__container__small__prop {
-  font-size: 5vh;
+	font-size: 5vh;
 }
 
 .card__container__small__label {
-  text-align: center;
-  font-size: 3vh;
+	text-align: center;
+	font-size: 3vh;
 }
 
 @media only screen and (min-width: 700px) {
