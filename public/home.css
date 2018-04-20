@@ -1,3 +1,13 @@
+.section {
+  width: 90vw;
+  border-bottom: 1px solid gray;
+  margin-bottom: 2vh;
+}
+
+.section__dashboard {
+  height: 90vh;
+}
+
 .card__hero {
   display: flex;
   flex-flow: row nowrap;
@@ -6,16 +16,16 @@
 }
 
 .card__hero__img {
-  flex-grow: 1;
-  max-width: 40%;
+  flex-grow: 2;
+  max-width: 45%;
   max-height: 40%;
-  border-radius: 30%;
+  border-radius: 25%;
   border: 2px solid black;
 }
 
 .card__hero__right {
-  flex-grow: 2;
-  font-size: 5vh;
+  flex-grow: 1;
+  font-size: 4.5vh;
   max-height: 90%;
   text-align: center;
   display: flex;
@@ -31,11 +41,17 @@
   flex-direction: row;
   flex-wrap: nowrap;
   border: none;
+  max-height: 33vh;
 }
 
 .card__container__small {
   flex-grow: 1;
-  min-height: 15vh;
+  min-height: 25vh;
   font-size: 3vh;
-  max-width: 45vw;
+  max-width: 55vw;
+  text-align: center;
+}
+
+.fas {
+  justify-content: center;
 }
