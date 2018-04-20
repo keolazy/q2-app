@@ -50,7 +50,11 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-	res.redirect('/events');
+	if (res.locals.user) {
+		res.redirect('/home');
+	} else {
+		res.render('landing');
+	}
 });
 
 app.get('/about', (req, res) => {
