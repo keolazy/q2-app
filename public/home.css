@@ -61,6 +61,8 @@
 	flex-grow: 1;
 	min-height: 25vh;
 	font-size: 3vh;
+	color: #000;
+	text-decoration: none;
 }
 
 .card__container__small:hover {

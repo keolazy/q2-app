@@ -55,22 +55,15 @@ router.use('/', (req, res, next) => {
 // });
 
 router.get('/', (req, res, next) => {
-	// let profileHero = knex("users_events")
-	//   .where("event_id", req.session.user)
-	//   .innerJoin("users", "users_events.user_id", "users.id")
-	//   .select({
-	//     userID: "users.id",
-	//     userFirst: "users.first",
-	//     userLast: "users.last",
-	//     profileID: "users_events.id",
-	//     profileQuestions: "users_events.questions",
-	//     profileTopics: "users_events.topics",
-	//     profileJob: "users_events.job_status",
-	//     profileNoise: "users_events.noise_level",
-	//     profileWhereToFind: "users_events.where_to_find",
-	//     profileAskMe: "users_events.ask_me",
-	//     profilePersonality: "users_events.personality"
-	//   });
+	let eventsQuery = knex('users_events')
+		.where('user_id', res.locals.user)
+		.innerJoin('events', 'users_events.event_id', 'events.id')
+		.select({
+			id: 'events.id',
+			name: 'events.name',
+			location: 'events.location',
+			date: 'events.date'
+		});
 
 	let userQuery = knex('users')
 		.where('id', res.locals.user)
@@ -88,7 +81,7 @@ router.get('/', (req, res, next) => {
 		.where('mutual', true)
 		.count();
 
-	Promise.all([userQuery, rsvpCount, hostingCount, connectionCount])
+	Promise.all([userQuery, rsvpCount, hostingCount, connectionCount, eventsQuery])
 		.then(data => {
 			let userData = data[0];
 			// console.log(`UserData: ${JSON.stringify(userData)}`);
@@ -98,12 +91,14 @@ router.get('/', (req, res, next) => {
 			// console.log(`Hosting Data: ${JSON.stringify(hostingData)}`);
 			let connectionData = data[3];
 			// console.log(`Connection Data: ${JSON.stringify(connectionData)}`);
+			let eventsData = data[4];
 
 			res.render('events/homeTest', {
 				user: userData,
 				rsvps: rsvpData[0].count,
 				hosting: hostingData[0].count,
-				connections: connectionData[0].count
+				connections: connectionData[0].count,
+				events: eventsData
 			});
 		})
 		.catch(error => {
