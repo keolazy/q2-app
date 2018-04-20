@@ -12,7 +12,7 @@
     <% include ../partials/nav %>
     <main id="main">
       <section class="section">
-        <div class="section__title"><a href="/events/">Events</a> >> <a href="/events/<%= event.id%>"><%= event.name %></a> >> Attendees</div>
+        <div class="section__subtitle"><a href="/events/">Events</a> >> <a href="/events/<%= event.id%>"><%= event.name %></a> >> Attendees</div>
         <% if (message) { %>
           <div class="section__message section__message--<%= message.type%>"><%= message.text %></div>
         <% } %>
@@ -21,6 +21,9 @@
           <% let connectionId = connections.findIndex(conn => conn.user_id_friend == profile.userID) %>
           <div class="card">
             <div class="card__title"><a href="/events/<%= event.id%>/profiles/<%=profile.profileID%>"><%= `${profile.userFirst} ${profile.userLast[0]}.` %></a></div>
+            <% if (profile.userPhoto) { %>
+              <div class="card__img" style="background-image: url(<%= `"${profile.userPhoto}"` %>)"></div>
+            <% } %>
             <ul class="card__list">
                 <% if (profile.profileQuestions) { %>
                   <li>
@@ -82,6 +85,7 @@
           </div>
         <% }) %>
       </section>
+      <% include ../partials/footer %>
     </main>
     <script src="/shared_scripts.js" charset="utf-8"></script>
   </body>

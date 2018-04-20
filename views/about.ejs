@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ReadMe App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <% include ./partials/nav %>
+
+    <main id="main">
+      <section class="section">
+        <div class='section__title'>About ReadMe</div>
+        <div class='section__subtitle'>Aka how to make professional networking a little less bad</div>
+        <p class="section__text">
+          ReadMe is a full-stack app built over the course of a week in mid-April 2018 as a midterm group-project for the Galvanize Web Development Immersive Course.
+        </p>
+        <div class='section__subtitle'>What does it do?</div>
+        <p class="section__text">
+          <strong>The Problem:</strong><br>
+          Professional networking can tend to be superficial and performative, or at least awkward. Most of the trouble is that people get reduced down to their work status / industry / job function. This makes interactions transactional. Which makes people sad.
+        </p>
+        <p class="section__text">
+          <strong>A Solution:</strong><br>
+          Prompt people to share more about themselves in advance. "More" means <em>more than your job status</em>, which could be anything from sincere questions about techn or current events, to which progressive rock bands and cat breeds you're into. Publish this personal "readme" in advance and share it with other attendees coming to the same networking event. And finally, give people a social media "Connect" option in the same fashion as a modern dating app: if the connection turns out to be mutual, then you gain access to each other's contact information, and can stay connected over the long haul.
+        </p>
+      </section>
+      <section class="section">
+        <div class='section__title'>Team</div>
+        <div class='section__subtitle'>Team Members</div>
+        <p class="section__text">
+
+        <strong>Kevin Galván</strong><br>
+        Kevin can be found on <a target="_blank" href="https://github.com/kg79">Github at kg79</a>. His quarter-1 Galvanize project can be found at <a target="_blank" href="http://awnauf.site/">awnauf.site</a>.<br>
+        <br>
+        <strong>Nathan Keolasy</strong><br>
+        Nathan can be found on <a target="_blank" href="https://github.com/keolazy">Github at keolazy</a>.<br>
+        <br>
+
+        <strong>Ian Schumann</strong><br>
+        Ian served as tech lead, project manager, and architect for this project.<br>
+        You can find him online at: <a target="_blank" href="https://github.com/ian-schu">Github</a> | <a target="_blank" href="https://ian-schu.github.io">Portfolio</a> | <a target="_blank" href="https://www.linkedin.com/in/ianschumann">LinkedIn</a> | <a target="_blank" href="https://ianschu.com">Blog</a>
+      </p>
+    </section>
+
+
+    <section class="section">
+      <div class='section__title'>Technology</div>
+      <div class="section__subtitle"><a target="_blank" href="https://github.com/ian-schu/q2-app">View this project on Github</a></div>
+      <p class="section__text"></p>
+      <div class='section__subtitle'>The Stack</div>
+        <p class="section__text">
+          Main ingredients for this project are:
+          <ul class="section__ul">
+            <li><strong>HTML, CSS, and vanilla JavaScript</strong> on the front</li>
+            <li><strong>Node + Express</strong> on the back</li>
+            <li><strong>Postgres + Knex</strong> for persistent storage and CRUD</li>
+            <li><strong>Express-session and bCrypt</strong> for auth</li>
+            <li><strong>EJS</strong> for server-side rendering</li>
+            <li><strong>Mocha, Chai, and Supertest</strong> for a bit of TDD</li>
+          </ul>
+        </p>
+        <div class='section__subtitle'>Decisions and Challenges</div>
+        <p class="section__text">
+          This app may have turned out more immediately usable if we reduced the number of pages (possibly to one), relied more heavily on AJAX calls, and built the back-end as a more modern API. But in the spirit of our second-quarter curriculum, we decided to build a more traditional full-stack app with lots of routing and server-side templated rendering, and very little front-end JavaScript.<br><br>
+          <strong>This ended up giving us all great practice with:</strong>
+          <ul class="section__ul">
+            <li>... handling database lookups and wrangling those payloads for rendering to a page,</li>
+            <li>... organizing and sequencing many pieces of middleware to cooperate coherently,</li>
+            <li>... using semi-persistent storage (e.g. sessions, cookies) to pass around short-term data such as redirect paths and confirmation / error messages</li>
+          </ul>
+        </p>
+          <p class="section__text">
+
+          ... And along the way we also learned plenty about merge conflicts.
+        </p>
+      </section>
+
+      <% include ./partials/footer %>
+    </main>
+    <script src="/shared_scripts.js" charset="utf-8"></script>
+
+  </body>
+</html>
