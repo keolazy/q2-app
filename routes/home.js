@@ -1,107 +1,115 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router({ mergeParams: true });
-const knex = require("../db/knex");
-const profiles = require("./profiles-routes");
-const methodOverride = require("method-override");
+const knex = require('../db/knex');
+const profiles = require('./profiles-routes');
+const methodOverride = require('method-override');
 
 router.use((req, res, next) => {
-  req.session.returnToPrev = req.session.returnTo;
-  req.session.returnTo = req.originalUrl;
-  next();
+	req.session.returnToPrev = req.session.returnTo;
+	req.session.returnTo = req.originalUrl;
+	next();
 });
 
-router.use("/", (req, res, next) => {
-  console.log(`Session user id is: ${res.locals.user}`);
-  if (res.locals.user) {
-    next();
-  } else {
-    req.session.message = {
-      type: "error",
-      text: "You must be logged in to view event profiles."
-    };
-    res.redirect("/login");
-  }
+router.use('/', (req, res, next) => {
+	console.log(`Session user id is: ${res.locals.user}`);
+	if (res.locals.user) {
+		next();
+	} else {
+		req.session.message = {
+			type: 'error',
+			text: 'You must be logged in to view event profiles.'
+		};
+		res.redirect('/login');
+	}
 });
 
 // Get all user's Events for Home Page stream.
-router.get("/", (req, res) => {
-  if (req.session.user) {
-    knex("users_events")
-      .where("user_id", req.session.user)
-      .innerJoin("events", "users_events.event_id", "events.id")
-      .select(
-        "users_events.id",
-        "users_events.user_id",
-        "users_events.event_id",
-        "events.name",
-        "events.description",
-        "events.location",
-        "events.date",
-        "events.start_time",
-        "events.end_time"
-      )
-      .then(users_events => {
-        console.log(users_events);
-        res.render("events/homeTest", { users_events: users_events });
-      });
-  } else {
-    req.session.message = {
-      type: "error",
-      text: "You must be logged in to view event profiles."
-    };
-    console.log(`Setting req session message to: ${req.session.message.text}`);
-    res.redirect("/login");
-  }
-});
-
-// router.get("/", (req, res, next) => {
-//   let profileHero = knex("users_events")
-//     .where("event_id", req.session.user)
-//     .innerJoin("users", "users_events.user_id", "users.id")
-//     .select({
-//       userID: "users.id",
-//       userFirst: "users.first",
-//       userLast: "users.last",
-//       profileID: "users_events.id",
-//       profileQuestions: "users_events.questions",
-//       profileTopics: "users_events.topics",
-//       profileJob: "users_events.job_status",
-//       profileNoise: "users_events.noise_level",
-//       profileWhereToFind: "users_events.where_to_find",
-//       profileAskMe: "users_events.ask_me",
-//       profilePersonality: "users_events.personality"
-//     });
-//
-//   //
-//   let rsvpCount = knex("users_events")
-//     .where("user_id", res.locals.user)
-//     .count("users_events");
-//
-//   let hostingCount = knex("events")
-//     .where("host_id", res.locals.user)
-//     .count("events");
-//
-//   let connectionCount = knex("connections")
-//     .where("mutual", true)
-//     .count();
-//
-//   Promise.all([rsvpCount, hostingCount, connectionCount])
-//     .then(data => {
-//       let rsvpData = data[0];
-//       let hostingData = data[1];
-//       let connectionData = data[2];
-//
-//       res.render("events/homeTest", {
-//         userID: res.locals.user,
-//         rsvps: rsvpData,
-//         hosting: hostingData,
-//         connections: connectionData
-//       });
-//     })
-//     .catch(error => {
-//       console.log(error);
-//       res.status(500).send(error);
-//     });
+// router.get('/', (req, res) => {
+// 	if (req.session.user) {
+// 		knex('users_events')
+// 			.where('user_id', req.session.user)
+// 			.innerJoin('events', 'users_events.event_id', 'events.id')
+// 			.select(
+// 				'users_events.id',
+// 				'users_events.user_id',
+// 				'users_events.event_id',
+// 				'events.name',
+// 				'events.description',
+// 				'events.location',
+// 				'events.date',
+// 				'events.start_time',
+// 				'events.end_time'
+// 			)
+// 			.then(users_events => {
+// 				console.log(users_events);
+// 				res.render('events/homeTest', { users_events: users_events });
+// 			});
+// 	} else {
+// 		req.session.message = {
+// 			type: 'error',
+// 			text: 'You must be logged in to view event profiles.'
+// 		};
+// 		console.log(`Setting req session message to: ${req.session.message.text}`);
+// 		res.redirect('/login');
+// 	}
 // });
+
+router.get('/', (req, res, next) => {
+	// let profileHero = knex("users_events")
+	//   .where("event_id", req.session.user)
+	//   .innerJoin("users", "users_events.user_id", "users.id")
+	//   .select({
+	//     userID: "users.id",
+	//     userFirst: "users.first",
+	//     userLast: "users.last",
+	//     profileID: "users_events.id",
+	//     profileQuestions: "users_events.questions",
+	//     profileTopics: "users_events.topics",
+	//     profileJob: "users_events.job_status",
+	//     profileNoise: "users_events.noise_level",
+	//     profileWhereToFind: "users_events.where_to_find",
+	//     profileAskMe: "users_events.ask_me",
+	//     profilePersonality: "users_events.personality"
+	//   });
+
+	let userQuery = knex('users')
+		.where('id', res.locals.user)
+		.first();
+
+	let rsvpCount = knex('users_events')
+		.where('user_id', res.locals.user)
+		.count('users_events');
+
+	let hostingCount = knex('events')
+		.where('host_id', res.locals.user)
+		.count('events');
+
+	let connectionCount = knex('connections')
+		.where('mutual', true)
+		.count();
+
+	Promise.all([userQuery, rsvpCount, hostingCount, connectionCount])
+		.then(data => {
+			let userData = data[0];
+			// console.log(`UserData: ${JSON.stringify(userData)}`);
+			let rsvpData = data[1];
+			// console.log(`RSVP Data: ${JSON.stringify(rsvpData)}`);
+			let hostingData = data[2];
+			// console.log(`Hosting Data: ${JSON.stringify(hostingData)}`);
+			let connectionData = data[3];
+			// console.log(`Connection Data: ${JSON.stringify(connectionData)}`);
+
+			res.render('events/homeTest', {
+				user: userData,
+				rsvps: rsvpData[0].count,
+				hosting: hostingData[0].count,
+				connections: connectionData[0].count
+			});
+		})
+		.catch(error => {
+			console.log(error);
+			res.status(500).send(error);
+		});
+});
 
 module.exports = router;

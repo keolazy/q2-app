@@ -18,92 +18,45 @@
       <section class='section section__dashboard'>
 
           <div class='card card__hero'>
-              <img class='card__hero__img' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqtkpkOpOHA_8z6e1Uw6JemH9gOoV67BbnvLEOysP_429qWU5N' alt='Disrupt Austin Banner Pic'>
+
               <div class="card__hero__right">
-                <div class="card__hero__right__text">User Name</div>
-                <div class="card__hero__right__text">More of some text</div>
-                <div class="card__hero__right__text">Even more text</div>
-                <div class="card__hero__right__text">Fourth line of text</div>
+                <div class="card__hero__right__text"><%=`Hi there, ${user.first}`%></div>
+                <div class="card__hero__right__text"><%=`How's the weather in ${user.location} today?`%></div>
               </div>
           </div>
+          <div class="card__hero__img" style="background-image: url(<%= `"${user.photo}"` %>)"></div>
 
               <div class='card card__container'>
 
                 <div class='card card__container__small'>
-                  <div class='Aligner-item'>
-                    <i class="fas fa-hashtag"></i><%=`${users_events.length}`%><br>RSVP'd Events
+                  <div class="card__container__small__prop">
+                    <i class="fas fa-hashtag"></i><%=`${rsvps}`%>
+                  </div>
+                  <div class="card__container__small__label">
+                    RSVP'd Events
                   </div>
                 </div>
 
                 <div class='card card__container__small'>
-                  <div class='Aligner-item'>
-                  <i class="fas fa-birthday-cake"></i> <br>Hosted Events.
+                  <div class="card__container__small__prop">
+                    <i class="fas fa-birthday-cake"></i> <%=`${hosting}`%>
+                  </div>
+                  <div class="card__container__small__label">
+                    Hosting Events
                   </div>
                 </div>
 
                 <div class='card card__container__small'>
-                  <div class='Aligner-item'>
-                  <i class="fas fa-users"></i><br>Connections.
+                  <div class="card__container__small__prop">
+                    <i class="fas fa-users"></i><%=`${connections}`%>
+                  </div>
+                  <div class="card__container__small__label">
+                    Connections
                   </div>
                 </div>
 
               </div>
 
-      </section>
-
-      <section class="section">
-        <div class="section__subtitle">Your Upcoming Events:</div>
-        <div class='section_title'> </div>
-
-          <% users_events.forEach(users_event => { %>
-
-
-            <div class='card'>
-              <div class='card__title'><%= `${users_event.name} - ${users_event.date} ` %></div>
-                <ul class='card__list'>
-
-                  <% if(users_event.description) { %>
-                    <li>
-                      <span class='card__prop'>Description:</span>
-                      <%= users_event.description %>
-                    <li>
-                  <% } %>
-
-                  <% if(users_event.location) { %>
-                    <li>
-                      <span class='card__prop'>location:</span>
-                      <%= users_event.location %>
-                    <li>
-                  <% } %>
-
-                  <% if(users_event.date) { %>
-                    <li>
-                      <span class='card__prop'>Date:</span>
-                      <%= users_event.date %>
-                    <li>
-                  <% } %>
-
-                  <% if(users_event.start_time) { %>
-                    <li>
-                      <span class='card__prop'>Starts:</span>
-                      <%= users_event.start_time %>
-                    <li>
-                  <% } %>
-
-                  <% if(users_event.end_time) { %>
-                    <li>
-                      <span class='card__prop'>Ends:</span>
-                      <%= users_event.end_time %>
-                    <li>
-                  <% } %>
-                </ul>
-                <br>
-                <div class="card__buttons">
-                    <a class="card__button card__button--green" href="/events/<%=users_event.event_id %>">Learn More</a>
-                </div>
-
-            </div>
-          <% }) %>
       </section>
       <% include ../partials/footer %>
     </main>
