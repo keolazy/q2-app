@@ -1,4 +1,3 @@
-
 **ReadMe is a simple proof-of-concept app that mashes up professional event discovery (a la EventBrite) with discrete social matching (similar to Tinder, Bumble, etc., but _meant for connections_ and not for dating)**. The goal is to make professional networking -- a milieu that is often superficial and awkward -- more deep, sincere, and meaningful.
 
 ReadMe was built by a small team, over the course of 1 week, as a self-directed midterm project in the Galvanize Web Development Immersive course.
@@ -16,5 +15,4 @@ I've also written my own making-of [on my blog](https://medium.com/@ianschum/rea
 
 * [Kevin Galvan](https://github.com/kg79)
 * [Nathan Keolasy](https://github.com/keolazy)
-* Ian Schumann (that's me)
-
+* [Ian Schumann](https:///github.com/ian-schu)
