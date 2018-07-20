@@ -12,7 +12,6 @@ A detailed write-up of the design process is visible on our **About** page: http
 I've also written my own making-of [on my blog](https://medium.com/@ianschum/readme-a-simple-social-media-app-built-with-node-postgres-and-ejs-b95de9ece408).
 
 ## Group Members
-
+* [Nathan Keolasy](https://keolazy.github.io)
 * [Kevin Galvan](https://github.com/kg79)
-* [Nathan Keolasy](https://github.com/keolazy)
 * [Ian Schumann](https:///github.com/ian-schu)
